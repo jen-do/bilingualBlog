@@ -1,0 +1,19 @@
+<h1>{{heading}}</h1>
+
+
+{{#each projectsEn}}
+    {{#if en_name}}
+    <div class="project-container">
+        <h2>{{en_name}}</h2>
+        <p>{{en_short}}</p>
+    </div>
+    {{/if}}
+{{/each}}
+
+
+{{#each projectsDe}}
+    <div class="project-container">
+        <h2>{{de_name}}</h2>
+        <p>{{de_short}}</de>
+    </div>
+{{/each}}

@@ -1,0 +1,29 @@
+input,
+textarea {
+    display: block;
+    width: 250px;
+}
+
+label {
+    margin: 15px;
+}
+
+.project-container {
+    border: 1px solid black;
+    margin: 10px;
+}
+
+.form-inner-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#form-outer-container {
+    margin: 0 auto;
+    width: 70%;
+    display: flex;
+    align-items: center;
+}

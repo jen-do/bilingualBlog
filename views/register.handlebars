@@ -1,0 +1,14 @@
+{{#if err}}
+    <p><strong>Something went wrong. Please try again.</strong></p>
+{{/if}}
+
+
+<form method="POST" autocomplete="off">
+    <input type="text" name="username" placeholder="username">
+    <input type="email" name="email" placeholder="email">
+    <input type="password" name="pass" placeholder="password">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button>submit</button>
+</form>
+
+<strong><p>If you already got an account...<br> <a href="/login"> >>> sign in here</a>.</p></strong>
