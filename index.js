@@ -38,17 +38,20 @@ app.use(
 app.use(csurf());
 
 app.use(function(req, res, next) {
+    if (req.session.locale) {
+        req.setLocale(req.session.locale);
+    }
+    next();
+});
+
+app.use(function(req, res, next) {
     res.locals.csrfToken = req.csrfToken();
     next();
 });
 
-app.use(express.static(__dirname + "/public"));
-app.use(express.static(__dirname + "/uploads"));
-
 app.use(function(req, res, next) {
     if (
-        !req.session.userId &&
-        req.url == "/edit/profile" &&
+        (!req.session.userId && req.url == "/edit/profile") ||
         req.url == "/edit/post"
     ) {
         res.redirect("/login");
@@ -56,6 +59,9 @@ app.use(function(req, res, next) {
         next();
     }
 });
+
+app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/uploads"));
 
 app.use(router);
 

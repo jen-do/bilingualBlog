@@ -19,6 +19,9 @@ label {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
 }
 
 #form-outer-container {
@@ -26,4 +29,6 @@ label {
     width: 70%;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
 }

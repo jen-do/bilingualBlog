@@ -4,11 +4,11 @@
     <p><strong>Something went wrong. Please try again.</strong></p>
 {{/if}}
 
-{{#if editor}}<a href="/edit/post">edit posts</a>{{/if}}
 
 <form method="POST" autocomplete="off">
 <div id="form-outer-container">
     <div class="form-inner-container">
+        <h2>DE</h2>
         <label><input type="text" name="de_name">Name des Projekts</label>
         <label><textarea name="de_short"></textarea>Kurzbeschreibung</label>
         <label><textarea name="de_long"></textarea>Langbeschreibung</label>
@@ -17,6 +17,7 @@
         <label><input type="text" name="de_web">Webseite</label>
     </div>
     <div class="form-inner-container">
+        <h2>EN</h2>
         <label><input type="text" name="en_name">name of the project</label>
         <label><textarea name="en_short"></textarea>short description</label>
         <label><textarea name="en_long"></textarea>long description</label>
@@ -24,10 +25,11 @@
         <label><input type="text" name="en_tags">tags</label>
         <label><input type="text" name="en_web">website</label>
     </div>
-
+    <div class="form-inner-container">
     <label><input type="email" name="contact" >Email</label>
     <!-- <label><input type="file" accept="image/*" name="image" >Logo</label> -->
     <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <button>submit</button>
+</div>
 </div>
 </form>

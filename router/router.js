@@ -2,17 +2,37 @@ const express = require("express"),
     router = express.Router();
 const bcrypt = require("../bcrypt");
 const db = require("../db");
+const i18n = require("i18n");
 
 /////////// home
 
 router.get("/", (req, res) => {
-    console.log("locales:", res.locals.locale, res.locals.getLocales);
+    // i18n.getLocale();
+    req.session.locale = res.locals.locale;
     res.render("about", {
         layout: "main"
     });
 });
 
-////////// login + registration + logout
+/////////// change language
+
+router.get("/lang", (req, res) => {
+    console.log(req.referer);
+    if (req.session.locale == "en") {
+        req.session.locale = "de";
+        i18n.setLocale(res.locals, "de");
+        var prevUrl = req.header("Referer");
+        return res.redirect(prevUrl);
+    }
+    if (req.session.locale == "de") {
+        req.session.locale = "en";
+        i18n.setLocale(res.locals, "en");
+        var backUrl = req.header("Referer");
+        res.redirect(backUrl);
+    }
+});
+
+/////////// register + login
 
 router
     .route("/register")
@@ -91,22 +111,15 @@ router
             });
     });
 
-router
-    .route("/logout")
-
-    .get((req, res) => {
-        req.session = null;
-        res.redirect("/");
-    });
-
 ////////// edit projects profile + posts
 
 router
     .route("/edit/profile")
 
     .get((req, res) => {
+        console.log("req.session", req.session.userId);
         res.render("editprofile", {
-            layout: "main",
+            layout: "loggedin",
             editor: req.session.editor
         });
     })
@@ -157,7 +170,7 @@ router
 
     .get((req, res) => {
         res.render("editposts", {
-            layout: "main"
+            layout: "loggedin"
         });
     })
 
@@ -185,14 +198,15 @@ router
             });
     });
 
-////////// projects + posts blogs
+////////// projects + posts blogs + links
 
 router
-    .route("/:lang/projects")
+    .route("/projects")
 
     .get((req, res) => {
-        console.log("locales", res.locals.locale);
-        if (req.params.lang == "en") {
+        // console.log("locales", res.locals.locale);
+        // req.params.lang = req.session.locale;
+        if (req.session.locale == "en") {
             db.getProjectInfoEn().then(results => {
                 // console.log(results);
                 const projectsEn = results;
@@ -202,9 +216,8 @@ router
                     projectsEn: projectsEn
                 });
             });
-        } else if (req.params.lang == "de") {
+        } else if (req.session.locale == "de") {
             db.getProjectInfoDe().then(results => {
-                // console.log(results);
                 const projectsDe = results;
                 res.render("projects", {
                     layout: "main",
@@ -218,10 +231,11 @@ router
     });
 
 router
-    .route("/:lang/blog")
+    .route("/blog")
 
     .get((req, res) => {
-        if (req.params.lang == "en") {
+        // req.params.lang = req.session.locale;
+        if (req.session.locale == "en") {
             db.getPostsEn().then(results => {
                 // console.log(results);
                 const postsEn = results;
@@ -230,7 +244,7 @@ router
                     postsEn: postsEn
                 });
             });
-        } else if (req.params.lang == "de") {
+        } else if (req.session.locale == "de") {
             db.getPostsDe().then(results => {
                 // console.log(results);
                 const postsDe = results;
@@ -240,6 +254,25 @@ router
                 });
             });
         }
+    });
+
+router
+    .route("/links")
+
+    .get((req, res) => {
+        res.render("links", {
+            layout: "main"
+        });
+    });
+
+//////////// Logout
+
+router
+    .route("/logout")
+
+    .get((req, res) => {
+        req.session = null;
+        res.redirect("/");
     });
 
 module.exports = router;
