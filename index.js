@@ -3,6 +3,16 @@ const app = express();
 const router = require("./router/router");
 // const db = require("./db");
 // const bcrypt = require("./bcrypt");
+const i18n = require("i18n");
+
+i18n.configure({
+    locales: ["en", "de"],
+    defaultLocale: "en",
+    // queryParameter: "lang",
+    directory: "" + __dirname + "/locales"
+});
+
+app.use(i18n.init);
 
 // handlebars
 var hb = require("express-handlebars");
@@ -36,7 +46,11 @@ app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/uploads"));
 
 app.use(function(req, res, next) {
-    if (!req.session.userId && req.url == "/edit/profile") {
+    if (
+        !req.session.userId &&
+        req.url == "/edit/profile" &&
+        req.url == "/edit/post"
+    ) {
         res.redirect("/login");
     } else {
         next();

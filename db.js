@@ -99,6 +99,36 @@ exports.saveProjectInfoEn = (
         });
 };
 
+exports.savePostDe = (title, post, tags, url) => {
+    return db
+        .query(
+            `
+        INSERT INTO posts_de (de_title, de_post, de_tags, de_url)
+        VALUES ($1, $2, $3, $4)
+        RETURNING de_title, de_post, de_tags, de_url
+        `,
+            [title, post, tags, url]
+        )
+        .then(results => {
+            return results.rows;
+        });
+};
+
+exports.savePostEn = (title, post, tags, url) => {
+    return db
+        .query(
+            `
+        INSERT INTO posts_en (en_title, en_post, en_tags, en_url)
+        VALUES ($1, $2, $3, $4)
+        RETURNING en_title, en_post, en_tags, en_url
+        `,
+            [title, post, tags, url]
+        )
+        .then(results => {
+            return results.rows;
+        });
+};
+
 exports.getProjectInfoEn = () => {
     return db
         .query(
@@ -125,6 +155,30 @@ exports.getProjectInfoDe = () => {
         )
         .then(results => {
             // console.log(results);
+            return results.rows;
+        });
+};
+
+exports.getPostsDe = () => {
+    return db
+        .query(
+            `
+        SELECT * FROM posts_de
+        `
+        )
+        .then(results => {
+            return results.rows;
+        });
+};
+
+exports.getPostsEn = () => {
+    return db
+        .query(
+            `
+        SELECT * FROM posts_en
+        `
+        )
+        .then(results => {
             return results.rows;
         });
 };

@@ -6,12 +6,13 @@ const db = require("../db");
 /////////// home
 
 router.get("/", (req, res) => {
+    console.log("locales:", res.locals.locale, res.locals.getLocales);
     res.render("about", {
         layout: "main"
     });
 });
 
-////////// login + registration
+////////// login + registration + logout
 
 router
     .route("/register")
@@ -90,7 +91,15 @@ router
             });
     });
 
-////////// edit projects profile
+router
+    .route("/logout")
+
+    .get((req, res) => {
+        req.session = null;
+        res.redirect("/");
+    });
+
+////////// edit projects profile + posts
 
 router
     .route("/edit/profile")
@@ -144,12 +153,48 @@ router
     });
 
 router
+    .route("/edit/post")
+
+    .get((req, res) => {
+        res.render("editposts", {
+            layout: "main"
+        });
+    })
+
+    .post((req, res) => {
+        Promise.all([
+            db.savePostDe(
+                req.body.de_title,
+                req.body.de_post,
+                req.body.de_tags,
+                req.body.de_url
+            ),
+            db.savePostEn(
+                req.body.en_title,
+                req.body.en_post,
+                req.body.en_tags,
+                req.body.en_url
+            )
+        ])
+            .then(results => {
+                console.log("results in POST /edit/post", results);
+                res.redirect("/");
+            })
+            .catch(err => {
+                console.log("error in POST /edit/post", err);
+            });
+    });
+
+////////// projects + posts blogs
+
+router
     .route("/:lang/projects")
 
     .get((req, res) => {
+        console.log("locales", res.locals.locale);
         if (req.params.lang == "en") {
             db.getProjectInfoEn().then(results => {
-                console.log(results);
+                // console.log(results);
                 const projectsEn = results;
                 res.render("projects", {
                     layout: "main",
@@ -159,7 +204,7 @@ router
             });
         } else if (req.params.lang == "de") {
             db.getProjectInfoDe().then(results => {
-                console.log(results);
+                // console.log(results);
                 const projectsDe = results;
                 res.render("projects", {
                     layout: "main",
@@ -169,6 +214,31 @@ router
             });
         } else {
             return;
+        }
+    });
+
+router
+    .route("/:lang/blog")
+
+    .get((req, res) => {
+        if (req.params.lang == "en") {
+            db.getPostsEn().then(results => {
+                // console.log(results);
+                const postsEn = results;
+                res.render("blog", {
+                    layout: "main",
+                    postsEn: postsEn
+                });
+            });
+        } else if (req.params.lang == "de") {
+            db.getPostsDe().then(results => {
+                // console.log(results);
+                const postsDe = results;
+                res.render("blog", {
+                    layout: "main",
+                    postsDe: postsDe
+                });
+            });
         }
     });
 

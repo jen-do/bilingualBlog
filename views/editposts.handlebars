@@ -1,0 +1,25 @@
+<h1>edit posts</h1>
+
+{{#if err}}
+    <p><strong>Something went wrong. Please try again.</strong></p>
+{{/if}}
+
+<form method="POST" autocomplete="off">
+    <div class="form-inner-container">
+        <label><input type="text" name="de_title">Überschrift</label>
+        <label><textarea name="de_post"></textarea>Text</label>
+        <label><input type="text" name="de_tags">Tags</label>
+        <label><input type="text" name="de_url">Links</label>
+    </div>
+    <div class="form-inner-container">
+        <label><input type="text" name="en_title">heading</label>
+        <label><textarea name="en_post"></textarea>text</label>
+        <label><input type="text" name="en_tags">tags</label>
+        <label><input type="text" name="en_url">links</label>
+    </div>
+
+    <!-- <label><input type="file" accept="image/*" name="image" >Bild</label> -->
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <button>submit</button>
+
+</form>
