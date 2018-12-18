@@ -17,7 +17,6 @@ router.get("/", (req, res) => {
 /////////// change language
 
 router.get("/lang", (req, res) => {
-    console.log(req.referer);
     if (req.session.locale == "en") {
         req.session.locale = "de";
         i18n.setLocale(res.locals, "de");
@@ -227,6 +226,30 @@ router
             });
         } else {
             return;
+        }
+    });
+
+router
+    .route("/projects/:id")
+
+    .get((req, res) => {
+        console.log(req.params.id);
+        if (req.session.locale == "en") {
+            db.getSingleProjectEn(req.params.id).then(results => {
+                const singleProjectEn = results;
+                res.render("projects", {
+                    layout: "main",
+                    singleProjectEn: singleProjectEn
+                });
+            });
+        } else if (req.session.locale == "de") {
+            db.getSingleProjectDe(req.params.id).then(results => {
+                const singleProjectDe = results;
+                res.render("projects", {
+                    layout: "main",
+                    singleProjectDe: singleProjectDe
+                });
+            });
         }
     });
 

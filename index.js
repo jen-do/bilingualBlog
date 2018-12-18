@@ -50,10 +50,9 @@ app.use(function(req, res, next) {
 });
 
 app.use(function(req, res, next) {
-    if (
-        (!req.session.userId && req.url == "/edit/profile") ||
-        req.url == "/edit/post"
-    ) {
+    if (!req.session.userId && req.url == "/edit/profile") {
+        res.redirect("/login");
+    } else if (!req.session.userId && req.url == "/edit/post") {
         res.redirect("/login");
     } else {
         next();

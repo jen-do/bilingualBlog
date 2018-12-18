@@ -3,19 +3,41 @@
 
 {{#each projectsEn}}
     {{#if en_name}}
-    <div class="project-container">
+    <a href='/projects/{{id}}'><div class="project-container">
         <h2>{{en_name}}</h2>
         <p>{{en_short}}</p>
         <p>{{en_tags}}</p>
-    </div>
+    </div></a>
     {{/if}}
 {{/each}}
 
 
 {{#each projectsDe}}
-    <div class="project-container">
+    <a href='/projects/{{id}}'><div class="project-container">
         <h2>{{de_name}}</h2>
         <p>{{de_short}}</p>
         <p>{{de_tags}}</p>
+    </div></a>
+{{/each}}
+
+
+{{#each singleProjectEn}}
+    <div class="project-container">
+        <h1>{{en_name}}</h1>
+        <p>{{en_short}}</p>
+        <p>{{en_long}}</p>
+        <p>{{en_contribute}}</p>
+        <p>{{en_tags}}</p>
     </div>
+{{/each}}
+
+
+{{#each singleProjectDe}}
+<div class="project-container">
+    <h1>{{de_name}}</h1>
+    <p>{{de_short}}</p>
+    <p>{{de_long}}</p>
+    <p>{{de_contribute}}</p>
+    <p>{{de_tags}}</p>
+</div>
 {{/each}}

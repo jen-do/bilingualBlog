@@ -133,7 +133,7 @@ exports.getProjectInfoEn = () => {
     return db
         .query(
             `
-        SELECT * FROM projects
+        SELECT projects.id, projects.email, projects.image, projects_en.en_name, projects_en.en_short, projects_en.en_long, projects_en.en_contribute, projects_en.en_tags, projects_en.en_web FROM projects
         LEFT JOIN projects_en
         ON projects.id = projects_id
         `
@@ -148,13 +148,47 @@ exports.getProjectInfoDe = () => {
     return db
         .query(
             `
-        SELECT * FROM projects
+        SELECT projects.id, projects.email, projects.image, projects_de.de_name, projects_de.de_short, projects_de.de_long, projects_de.de_contribute, projects_de.de_tags, projects_de.de_web FROM projects
         LEFT JOIN projects_de
         ON projects.id = projects_id
         `
         )
         .then(results => {
             // console.log(results);
+            return results.rows;
+        });
+};
+
+exports.getSingleProjectEn = id => {
+    return db
+        .query(
+            `
+        SELECT * FROM projects
+        LEFT JOIN projects_en
+        ON projects.id = projects_id
+        WHERE projects.id = $1
+        `,
+            [id]
+        )
+        .then(results => {
+            // console.log(results);
+            return results.rows;
+        });
+};
+
+exports.getSingleProjectDe = id => {
+    return db
+        .query(
+            `
+        SELECT * FROM projects
+        LEFT JOIN projects_de
+        ON projects.id = projects_id
+        WHERE projects.id = $1
+        `,
+            [id]
+        )
+        .then(results => {
+            console.log(results);
             return results.rows;
         });
 };
