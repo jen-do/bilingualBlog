@@ -118,7 +118,7 @@ router
     .get((req, res) => {
         console.log("req.session", req.session.userId);
         res.render("editprofile", {
-            layout: "loggedin"
+            layout: "main"
         });
     })
 
@@ -137,6 +137,34 @@ router
         )
             .then(results => {
                 console.log("results in db.saveProjectInfoGeneral", results);
+
+                var httpUrlDe = "";
+                var httpUrlEn = "";
+
+                if (
+                    req.body.de_web !== "" &&
+                    !req.body.de_web.startsWith("http") &&
+                    !req.body.de_web.startsWith("https")
+                ) {
+                    httpUrlDe = "http://" + req.body.de_web;
+                    console.log("no http");
+                } else {
+                    httpUrlDe = req.body.de_web;
+                    console.log("http");
+                }
+
+                if (
+                    req.body.en_web !== "" &&
+                    !req.body.en_web.startsWith("http") &&
+                    !req.body.en_web.startsWith("https")
+                ) {
+                    httpUrlEn = "http://" + req.body.en_web;
+                    console.log("no http");
+                } else {
+                    httpUrlEn = req.body.en_web;
+                    console.log("http");
+                }
+
                 Promise.all([
                     db.saveProjectInfoDe(
                         req.body.de_name,
@@ -144,7 +172,8 @@ router
                         req.body.de_long,
                         req.body.de_contribute,
                         req.body.de_tags,
-                        req.body.de_web,
+                        httpUrlDe,
+                        // req.body.de_web,
                         results[0].id
                     ),
                     db.saveProjectInfoEn(
@@ -153,7 +182,8 @@ router
                         req.body.en_long,
                         req.body.en_contribute,
                         req.body.en_tags,
-                        req.body.en_web,
+                        httpUrlEn,
+                        // req.body.en_web,
                         results[0].id
                     )
                 ])
@@ -167,7 +197,7 @@ router
                     .catch(err => {
                         console.log("error in POST /edit/profile", err);
                         res.render("editprofile", {
-                            layout: "loggedin",
+                            layout: "main",
                             err: err
                         });
                     });
@@ -175,7 +205,7 @@ router
             .catch(err => {
                 console.log("error in db.saveProjectInfoGeneral", err);
                 res.render("editprofile", {
-                    layout: "loggedin",
+                    layout: "main",
                     err: err
                 });
             });
@@ -192,13 +222,13 @@ router
             .then(results => {
                 if (req.session.locale == "de") {
                     res.render("ownprojects", {
-                        layout: "loggedin",
+                        layout: "main",
                         updateProjectDe: results[0]
                     });
                 } else if (req.session.locale == "en") {
                     console.log(results[1]);
                     res.render("ownprojects", {
-                        layout: "loggedin",
+                        layout: "main",
                         updateProjectEn: results[1]
                     });
                 }
@@ -220,7 +250,7 @@ router
             .then(results => {
                 console.log("results in /update/profile/:id", results);
                 res.render("updateprofile", {
-                    layout: "loggedin",
+                    layout: "main",
                     singleProjectEn: results[0],
                     singleProjectDe: results[1]
                 });
@@ -238,6 +268,34 @@ router
         )
             .then(results => {
                 console.log("results in db.updateProjectInfoGeneral", results);
+
+                var httpUrlDe = "";
+                var httpUrlEn = "";
+
+                if (
+                    req.body.de_web !== "" &&
+                    !req.body.de_web.startsWith("http") &&
+                    !req.body.de_web.startsWith("https")
+                ) {
+                    httpUrlDe = "http://" + req.body.de_web;
+                    console.log("no http");
+                } else {
+                    httpUrlDe = req.body.de_web;
+                    console.log("http");
+                }
+
+                if (
+                    req.body.en_web !== "" &&
+                    !req.body.en_web.startsWith("http") &&
+                    !req.body.en_web.startsWith("https")
+                ) {
+                    httpUrlEn = "http://" + req.body.en_web;
+                    console.log("no http");
+                } else {
+                    httpUrlEn = req.body.en_web;
+                    console.log("http");
+                }
+
                 Promise.all([
                     db.updateProjectInfoDe(
                         req.body.de_name,
@@ -245,7 +303,8 @@ router
                         req.body.de_long,
                         req.body.de_contribute,
                         req.body.de_tags,
-                        req.body.de_web,
+                        httpUrlDe,
+                        // req.body.de_web,
                         req.params.id
                     ),
                     db.updateProjectInfoEn(
@@ -254,7 +313,8 @@ router
                         req.body.en_long,
                         req.body.en_contribute,
                         req.body.en_tags,
-                        req.body.en_web,
+                        httpUrlEn,
+                        // req.body.en_web,
                         req.params.id
                     )
                 ])
@@ -273,7 +333,7 @@ router
                     .catch(err => {
                         console.log("error in POST /edit/profile", err);
                         res.render("updateprofile", {
-                            layout: "loggedin",
+                            layout: "main",
                             err: err
                         });
                     });
@@ -281,7 +341,7 @@ router
             .catch(err => {
                 console.log("error in db.saveProjectInfoGeneral", err);
                 res.render("editprofile", {
-                    layout: "loggedin",
+                    layout: "main",
                     err: err
                 });
             });
@@ -292,7 +352,7 @@ router
 
     .get((req, res) => {
         res.render("editposts", {
-            layout: "loggedin",
+            layout: "main",
             editor: req.session.editor
         });
     })
@@ -321,7 +381,7 @@ router
                 .catch(err => {
                     console.log("error in POST /edit/post", err);
                     res.render("editposts", {
-                        layout: "loggedin",
+                        layout: "main",
                         err: err
                     });
                 });

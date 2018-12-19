@@ -32,24 +32,26 @@
 </div>
 
 {{#each singleProjectEn}}
-    <div class="project-container">
+    <div class="blog-roll-container">
         <img src={{image}}>
         <h1>{{en_name}}</h1>
-        <p>{{en_short}}</p>
-        <p>{{en_long}}</p>
-        <p>{{en_contribute}}</p>
+        <p><strong>{{en_short}}</strong></p>
+        <p><pre>{{en_long}}</pre></p>
+        <p><strong>How to contribute</strong>: <pre>{{en_contribute}}</pre></p>
         <p>{{en_tags}}</p>
+        <p><strong>Web</strong>: <a href="{{en_web}}">{{en_web}}</a></p>
     </div>
 {{/each}}
 
 
 {{#each singleProjectDe}}
-<div class="project-container">
+<div class="blog-roll-container">
     <img src={{image}}>
     <h1>{{de_name}}</h1>
-    <p>{{de_short}}</p>
-    <p>{{de_long}}</p>
-    <p>{{de_contribute}}</p>
+    <p><strong>{{de_short}}</strong></p>
+    <p><pre>{{de_long}}</pre></p>
+    <p><strong>Mitmachen</strong>: <pre>{{de_contribute}}</pre></p>
     <p>{{de_tags}}</p>
+    <p><strong>Web</strong>: <a href="{{de_web}}">{{de_web}}</a></p>
 </div>
 {{/each}}

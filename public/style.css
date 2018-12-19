@@ -54,24 +54,43 @@ nav a:hover {
     justify-content: space-around;
 }
 
+.projects-outer-container::after {
+    content: "";
+    flex: auto;
+}
+
+.project-container,
+.blog-roll-container {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+}
+
+.project-container {
+    width: 31.25%;
+}
+
+.blog-roll-container {
+    width: 70%;
+}
+
 .project-container img {
     width: 100%;
     max-height: 200px;
     object-fit: cover;
 }
 
-.project-container {
-    border: 1px solid black;
-    margin: 10px;
-    padding: 10px;
-    width: 30%;
+.blog-roll-container img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
 }
 
 /********** FORM ELEMENTS ************/
 
 #form-outer-container {
     margin: 0 auto;
-    width: 70%;
+    width: 100%;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -92,7 +111,7 @@ nav a:hover {
 input,
 textarea {
     display: block;
-    width: 250px;
+    width: 350px;
     padding: 5px;
     margin: 10px 0;
 }

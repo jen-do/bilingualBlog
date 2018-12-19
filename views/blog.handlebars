@@ -3,20 +3,21 @@
 
 {{#each postsEn}}
     {{#if en_title}}
-    <div class="project-container">
+    <div class="blog-roll-container">
         <img src="{{image}}">
         <h2>{{en_title}}</h2>
-        <p>{{en_post}}</p>
-
+        <p><pre>{{en_post}}</pre></p>
+        <div>{{en_tags}}</div>
     </div>
     {{/if}}
 {{/each}}
 
 
 {{#each postsDe}}
-    <div class="project-container">
+    <div class="blog-roll-container">
         <img src="{{image}}">
         <h2>{{de_title}}</h2>
-        <p>{{de_post}}</de>
+        <p><pre>{{de_post}}</pre></p>
+        <div>{{de_tags}}</div>
     </div>
 {{/each}}

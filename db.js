@@ -268,7 +268,7 @@ exports.savePost = image => {
         VALUES ($1)
         RETURNING image, id
         `,
-            [image]
+            [image || null]
         )
         .then(results => {
             return results.rows;
@@ -313,7 +313,7 @@ exports.getPostsDe = () => {
         FROM posts
         LEFT JOIN posts_de
         ON posts.id = posts_de.post_id
-
+        ORDER BY id DESC
         `
         )
         .then(results => {
@@ -329,6 +329,7 @@ exports.getPostsEn = () => {
         FROM posts
         LEFT JOIN posts_en
         ON posts.id = posts_en.post_id
+        ORDER BY id DESC
         `
         )
         .then(results => {
