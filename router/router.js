@@ -124,10 +124,20 @@ router
     })
 
     .post((req, res) => {
-        console.log("req.body in POST /edit/profile ", req.body);
-        db.saveProjectInfoGeneral(req.body.contact, req.session.userId)
+        console.log(
+            "req.body in POST /edit/profile ",
+            req.body,
+            "req.file in POST /edit/profile ",
+            req.file
+        );
+
+        db.saveProjectInfoGeneral(
+            req.body.contact,
+            "/" + req.file.filename,
+            req.session.userId
+        )
             .then(results => {
-                // console.log("results in db.saveProjectInfoGeneral", results);
+                console.log("results in db.saveProjectInfoGeneral", results);
                 Promise.all([
                     db.saveProjectInfoDe(
                         req.body.de_name,
@@ -157,10 +167,126 @@ router
                     })
                     .catch(err => {
                         console.log("error in POST /edit/profile", err);
+                        res.render("editprofile", {
+                            layout: "loggedin",
+                            err: err
+                        });
                     });
             })
             .catch(err => {
                 console.log("error in db.saveProjectInfoGeneral", err);
+                res.render("editprofile", {
+                    layout: "loggedin",
+                    err: err
+                });
+            });
+    });
+
+router
+    .route("/update/profile")
+
+    .get((req, res) => {
+        Promise.all([
+            db.getProjectDeForReedit(req.session.userId),
+            db.getProjectEnForReedit(req.session.userId)
+        ])
+            .then(results => {
+                if (req.session.locale == "de") {
+                    res.render("ownprojects", {
+                        layout: "loggedin",
+                        updateProjectDe: results[0],
+                        editor: req.session.editor
+                    });
+                } else if (req.session.locale == "en") {
+                    console.log(results[1]);
+                    res.render("ownprojects", {
+                        layout: "loggedin",
+                        updateProjectEn: results[1],
+                        editor: req.session.editor
+                    });
+                }
+            })
+            .catch(err => {
+                console.log("error in reedit profile", err);
+            });
+    });
+
+router
+    .route("/update/profile/:id")
+
+    .get((req, res) => {
+        console.log(req.params.id);
+        Promise.all([
+            db.getSingleProjectEn(req.params.id),
+            db.getSingleProjectDe(req.params.id)
+        ])
+            .then(results => {
+                console.log("results in /update/profile/:id", results);
+                res.render("updateprofile", {
+                    layout: "loggedin",
+                    editor: req.session.editor,
+                    singleProjectEn: results[0],
+                    singleProjectDe: results[1]
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    })
+
+    .post((req, res) => {
+        db.updateProjectInfoGeneral(
+            req.params.id,
+            req.body.contact,
+            "/" + req.file.filename
+        )
+            .then(results => {
+                console.log("results in db.updateProjectInfoGeneral", results);
+                Promise.all([
+                    db.updateProjectInfoDe(
+                        req.body.de_name,
+                        req.body.de_short,
+                        req.body.de_long,
+                        req.body.de_contribute,
+                        req.body.de_tags,
+                        req.body.de_web,
+                        req.params.id
+                    ),
+                    db.updateProjectInfoEn(
+                        req.body.en_name,
+                        req.body.en_short,
+                        req.body.en_long,
+                        req.body.en_contribute,
+                        req.body.en_tags,
+                        req.body.en_web,
+                        req.params.id
+                    )
+                ])
+                    .then(results => {
+                        console.log(
+                            "results in db.updateProjectInfoDe/en",
+                            results
+                        );
+                        res.render("updateprofile", {
+                            editor: req.session.editor,
+                            singleProjectEn: results[0],
+                            singleProjectDe: results[1]
+                        });
+                    })
+                    .catch(err => {
+                        console.log("error in POST /edit/profile", err);
+                        res.render("updateprofile", {
+                            layout: "loggedin",
+                            err: err
+                        });
+                    });
+            })
+            .catch(err => {
+                console.log("error in db.saveProjectInfoGeneral", err);
+                res.render("editprofile", {
+                    layout: "loggedin",
+                    err: err
+                });
             });
     });
 
@@ -169,7 +295,8 @@ router
 
     .get((req, res) => {
         res.render("editposts", {
-            layout: "loggedin"
+            layout: "loggedin",
+            editor: req.session.editor
         });
     })
 
@@ -194,6 +321,10 @@ router
             })
             .catch(err => {
                 console.log("error in POST /edit/post", err);
+                res.render("editposts", {
+                    layout: "loggedin",
+                    err: err
+                });
             });
     });
 
@@ -207,7 +338,7 @@ router
         // req.params.lang = req.session.locale;
         if (req.session.locale == "en") {
             db.getProjectInfoEn().then(results => {
-                // console.log(results);
+                console.log(results);
                 const projectsEn = results;
                 res.render("projects", {
                     layout: "main",

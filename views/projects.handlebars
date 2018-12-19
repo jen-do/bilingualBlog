@@ -1,25 +1,35 @@
 <h1>{{heading}}</h1>
 
 
+
+<div class="projects-outer-container">
 {{#each projectsEn}}
     {{#if en_name}}
-    <a href='/projects/{{id}}'><div class="project-container">
+    <!-- <a href='/projects/{{id}}'>-->
+    <div class="project-container" id="{{id}}">
+        <img src={{image}}>
+
         <h2>{{en_name}}</h2>
         <p>{{en_short}}</p>
         <p>{{en_tags}}</p>
-    </div></a>
+    </div>
+<!-- </a> -->
     {{/if}}
 {{/each}}
+</div>
 
-
+<div class="projects-outer-container">
 {{#each projectsDe}}
-    <a href='/projects/{{id}}'><div class="project-container">
+    <!-- <a href='/projects/{{id}}'>-->
+    <div class="project-container" id={{id}}>
+        <img src={{image}}>
         <h2>{{de_name}}</h2>
         <p>{{de_short}}</p>
         <p>{{de_tags}}</p>
-    </div></a>
+    </div>
+<!-- </a> -->
 {{/each}}
-
+</div>
 
 {{#each singleProjectEn}}
     <div class="project-container">

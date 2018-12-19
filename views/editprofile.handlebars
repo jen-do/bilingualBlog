@@ -5,7 +5,7 @@
 {{/if}}
 
 
-<form method="POST" autocomplete="off">
+<form method="POST" autocomplete="off" enctype="multipart/form-data">
 <div id="form-outer-container">
     <div class="form-inner-container">
         <h2>DE</h2>
@@ -26,10 +26,10 @@
         <label><input type="text" name="en_web">website</label>
     </div>
     <div class="form-inner-container">
-    <label><input type="email" name="contact" >Email</label>
-    <!-- <label><input type="file" accept="image/*" name="image" >Logo</label> -->
-    <input type="hidden" name="_csrf" value="{{csrfToken}}">
-    <button>submit</button>
-</div>
+        <label><input type="email" name="contact" >Email</label>
+        <label><input id="upload" type="file" accept="image/*" name="file">Logo</label>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <button>submit</button>
+    </div>
 </div>
 </form>

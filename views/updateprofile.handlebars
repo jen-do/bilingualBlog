@@ -1,0 +1,40 @@
+<h1>update project info</h1>
+
+{{#if err}}
+    <div id="error"><strong>Uups. Something went wrong. Please try again.</strong></div>
+{{/if}}
+
+
+<form method="POST" autocomplete="off" enctype="multipart/form-data">
+    <div id="form-outer-container">
+        <div class="form-inner-container">
+        {{#each singleProjectDe}}
+        <h2>DE</h2>
+        <label><input type="text" name="de_name" value="{{de_name}}">Name des Projekts</label>
+        <label><textarea name="de_short">{{de_short}}</textarea>Kurzbeschreibung</label>
+        <label><textarea name="de_long">{{de_long}}</textarea>Langbeschreibung</label>
+        <label><textarea name="de_contribute">{{de_contribute}}</textarea>Beitragen</label>
+        <label><input type="text" name="de_tags" value="{{de_tags}}">Tags</label>
+        <label><input type="text" name="de_web" value="{{de_web}}">Webseite</label>
+        {{/each}}
+    </div>
+    <div class="form-inner-container">
+        {{#each singleProjectEn}}
+        <h2>EN</h2>
+        <label><input type="text" name="en_name" value="{{en_name}}">name of the project</label>
+        <label><textarea name="en_short">{{en_short}}</textarea>short description</label>
+        <label><textarea name="en_long">{{en_long}}</textarea>long description</label>
+        <label><textarea name="en_contribute">{{en_contribute}}</textarea>how to contribute</label>
+        <label><input type="text" name="en_tags" value="{{en_tags}}">tags</label>
+        <label><input type="text" name="en_web" value="{{en_web}}">website</label>
+    </div>
+    <div class="form-inner-container">
+        <label><input type="email" name="contact" value="{{email}}">Email</label>
+        <label><input id="upload" type="file" accept="image/*" name="file">Logo</label>
+        {{/each}}
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <button>submit</button>
+
+    </div>
+</div>
+</form>

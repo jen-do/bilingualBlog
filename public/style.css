@@ -1,3 +1,23 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.top-bar {
+    height: 60px;
+    background: #eaeaea;
+}
+
+#logo {
+    width: 40px;
+    margin: 10px 20px;
+}
+
+nav a {
+    display: block;
+}
+
 input,
 textarea {
     display: block;
@@ -8,9 +28,23 @@ label {
     margin: 15px;
 }
 
+.projects-outer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.project-container img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+}
+
 .project-container {
     border: 1px solid black;
     margin: 10px;
+    padding: 10px;
+    width: 30%;
 }
 
 .form-inner-container {
