@@ -7,7 +7,7 @@
     {{#if en_name}}
     <!-- <a href='/projects/{{id}}'>-->
     <div class="project-container" id="{{id}}">
-        <img src={{image}}>
+        <a href="/projects/{{id}}"><img src={{image}}></a>
 
         <h2>{{en_name}}</h2>
         <p>{{en_short}}</p>
@@ -21,8 +21,8 @@
 <div class="projects-outer-container">
 {{#each projectsDe}}
     <!-- <a href='/projects/{{id}}'>-->
-    <div class="project-container" id={{id}}>
-        <img src={{image}}>
+    <div class="project-container">
+        <a href="/projects/{{id}}"><img src={{image}}></a>
         <h2>{{de_name}}</h2>
         <p>{{de_short}}</p>
         <p>{{de_tags}}</p>

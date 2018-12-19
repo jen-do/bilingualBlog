@@ -163,7 +163,7 @@ router
                             "results in db.saveProjectInfoDe/en",
                             results
                         );
-                        res.redirect("/");
+                        res.redirect("/update/profile");
                     })
                     .catch(err => {
                         console.log("error in POST /edit/profile", err);
@@ -267,7 +267,9 @@ router
                             "results in db.updateProjectInfoDe/en",
                             results
                         );
+                        // res.redirect("/update/profile/" + req.params.id);
                         res.render("updateprofile", {
+                            success: true,
                             editor: req.session.editor,
                             singleProjectEn: results[0],
                             singleProjectDe: results[1]
@@ -301,31 +303,34 @@ router
     })
 
     .post((req, res) => {
-        Promise.all([
-            db.savePostDe(
-                req.body.de_title,
-                req.body.de_post,
-                req.body.de_tags,
-                req.body.de_url
-            ),
-            db.savePostEn(
-                req.body.en_title,
-                req.body.en_post,
-                req.body.en_tags,
-                req.body.en_url
-            )
-        ])
-            .then(results => {
-                console.log("results in POST /edit/post", results);
-                res.redirect("/");
-            })
-            .catch(err => {
-                console.log("error in POST /edit/post", err);
-                res.render("editposts", {
-                    layout: "loggedin",
-                    err: err
+        db.savePost("/" + req.file.filename).then(results => {
+            console.log(results);
+            Promise.all([
+                db.savePostDe(
+                    req.body.de_title,
+                    req.body.de_post,
+                    req.body.de_tags,
+                    results[0].id
+                ),
+                db.savePostEn(
+                    req.body.en_title,
+                    req.body.en_post,
+                    req.body.en_tags,
+                    results[0].id
+                )
+            ])
+                .then(results => {
+                    console.log("results in POST /edit/post", results);
+                    res.redirect("/blog");
+                })
+                .catch(err => {
+                    console.log("error in POST /edit/post", err);
+                    res.render("editposts", {
+                        layout: "loggedin",
+                        err: err
+                    });
                 });
-            });
+        });
     });
 
 ////////// projects + posts blogs + links
@@ -391,7 +396,7 @@ router
         // req.params.lang = req.session.locale;
         if (req.session.locale == "en") {
             db.getPostsEn().then(results => {
-                // console.log(results);
+                console.log(results);
                 const postsEn = results;
                 res.render("blog", {
                     layout: "main",
@@ -400,7 +405,7 @@ router
             });
         } else if (req.session.locale == "de") {
             db.getPostsDe().then(results => {
-                // console.log(results);
+                console.log(results);
                 const postsDe = results;
                 res.render("blog", {
                     layout: "main",

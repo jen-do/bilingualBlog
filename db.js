@@ -204,6 +204,7 @@ exports.updateProjectInfoGeneral = (id, email, image) => {
         UPDATE projects
         SET email = $2, image = $3
         WHERE id = $1
+        RETURNING id, email image
         `,
             [id, email, image]
         )
@@ -231,6 +232,7 @@ exports.updateProjectInfoDe = (
             [name, short, long, contribute, tags, web, id]
         )
         .then(results => {
+            console.log(results);
             return results.rows;
         });
 };
@@ -258,30 +260,45 @@ exports.updateProjectInfoEn = (
         });
 };
 
-exports.savePostDe = (title, post, tags, url) => {
+exports.savePost = image => {
     return db
         .query(
             `
-        INSERT INTO posts_de (de_title, de_post, de_tags, de_url)
-        VALUES ($1, $2, $3, $4)
-        RETURNING de_title, de_post, de_tags, de_url
+        INSERT INTO posts (image)
+        VALUES ($1)
+        RETURNING image, id
         `,
-            [title, post, tags, url]
+            [image]
         )
         .then(results => {
             return results.rows;
         });
 };
 
-exports.savePostEn = (title, post, tags, url) => {
+exports.savePostDe = (title, post, tags, post_id) => {
     return db
         .query(
             `
-        INSERT INTO posts_en (en_title, en_post, en_tags, en_url)
+        INSERT INTO posts_de (de_title, de_post, de_tags, post_id)
         VALUES ($1, $2, $3, $4)
-        RETURNING en_title, en_post, en_tags, en_url
+        RETURNING de_title, de_post, de_tags
         `,
-            [title, post, tags, url]
+            [title, post, tags, post_id]
+        )
+        .then(results => {
+            return results.rows;
+        });
+};
+
+exports.savePostEn = (title, post, tags, post_id) => {
+    return db
+        .query(
+            `
+        INSERT INTO posts_en (en_title, en_post, en_tags, post_id)
+        VALUES ($1, $2, $3, $4)
+        RETURNING en_title, en_post, en_tags
+        `,
+            [title, post, tags, post_id]
         )
         .then(results => {
             return results.rows;
@@ -292,7 +309,11 @@ exports.getPostsDe = () => {
     return db
         .query(
             `
-        SELECT * FROM posts_de
+        SELECT posts.id, posts.image, posts_de.de_title, posts_de.de_post, posts_de.de_tags
+        FROM posts
+        LEFT JOIN posts_de
+        ON posts.id = posts_de.post_id
+
         `
         )
         .then(results => {
@@ -304,7 +325,10 @@ exports.getPostsEn = () => {
     return db
         .query(
             `
-        SELECT * FROM posts_en
+        SELECT posts.id, posts.image, posts_en.en_title, posts_en.en_post, posts_en.en_tags
+        FROM posts
+        LEFT JOIN posts_en
+        ON posts.id = posts_en.post_id
         `
         )
         .then(results => {

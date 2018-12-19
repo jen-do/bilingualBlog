@@ -63,6 +63,7 @@ app.use(
 
 app.use("/edit/profile", uploader.single("file"));
 app.use("/update/profile/:id", uploader.single("file"));
+app.use("/edit/post", uploader.single("file"));
 
 app.use(csurf());
 

@@ -4,8 +4,10 @@
 {{#each postsEn}}
     {{#if en_title}}
     <div class="project-container">
+        <img src="{{image}}">
         <h2>{{en_title}}</h2>
         <p>{{en_post}}</p>
+
     </div>
     {{/if}}
 {{/each}}
@@ -13,6 +15,7 @@
 
 {{#each postsDe}}
     <div class="project-container">
+        <img src="{{image}}">
         <h2>{{de_title}}</h2>
         <p>{{de_post}}</de>
     </div>
