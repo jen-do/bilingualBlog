@@ -1,4 +1,4 @@
-<h1>edit profile</h1>
+<h1>{{{__ "heading edit profile"}}}</h1>
 
 {{#if err}}
     <p><strong>Something went wrong. Please try again.</strong></p>
@@ -9,27 +9,27 @@
 <div id="form-outer-container">
     <div class="form-inner-container">
         <h2>DE</h2>
-        <label><input type="text" name="de_name">Name des Projekts</label>
-        <label><textarea name="de_short"></textarea>Kurzbeschreibung</label>
-        <label><textarea name="de_long"></textarea>Langbeschreibung</label>
-        <label><textarea name="de_contribute"></textarea>Beitragen</label>
-        <label><input type="text" name="de_tags">Tags</label>
-        <label><input type="text" name="de_web">Webseite</label>
+        <label>Name des Projekts<input type="text" name="de_name"></label>
+        <label>Kurzbeschreibung<textarea name="de_short"></textarea></label>
+        <label>Langbeschreibung<textarea name="de_long"></textarea></label>
+        <label>Beitragen<textarea name="de_contribute"></textarea></label>
+        <label>Tags<input type="text" name="de_tags"></label>
+        <label>Webseite<input type="text" name="de_web"></label>
     </div>
     <div class="form-inner-container">
         <h2>EN</h2>
-        <label><input type="text" name="en_name">name of the project</label>
-        <label><textarea name="en_short"></textarea>short description</label>
-        <label><textarea name="en_long"></textarea>long description</label>
-        <label><textarea name="en_contribute"></textarea>how to contribute</label>
-        <label><input type="text" name="en_tags">tags</label>
-        <label><input type="text" name="en_web">website</label>
+        <label>Name of the project<input type="text" name="en_name"></label>
+        <label>Short description<textarea name="en_short"></textarea></label>
+        <label>Long description<textarea name="en_long"></textarea></label>
+        <label>How to contribute<textarea name="en_contribute"></textarea></label>
+        <label>Tags<input type="text" name="en_tags"></label>
+        <label>Website<input type="text" name="en_web"></label>
     </div>
     <div class="form-inner-container">
-        <label><input type="email" name="contact" >Email</label>
-        <label><input id="upload" type="file" accept="image/*" name="file">Logo</label>
+        <label>Email<input type="email" name="contact" ></label>
+        <label>Logo<input id="upload" type="file" accept="image/*" name="file"></label>
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
-        <button>submit</button>
+        <button>{{{__ "button publish"}}}</button>
     </div>
 </div>
 </form>

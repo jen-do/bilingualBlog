@@ -89,6 +89,24 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.use((req, res, next) => {
+    if (req.session.userId) {
+        res.locals.loggedIn = true;
+    } else {
+        res.locals.loggedIn = false;
+    }
+    next();
+});
+
+app.use((req, res, next) => {
+    if (req.session.editor) {
+        res.locals.editor = true;
+    } else {
+        res.locals.editor = false;
+    }
+    next();
+});
+
 app.use(router);
 
 app.use(express.static(__dirname + "/public"));

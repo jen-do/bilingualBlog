@@ -4,8 +4,8 @@ DROP TABLE IF EXISTS projects_en;
 
 CREATE TABLE projects(
     id SERIAL PRIMARY KEY,
-    email VARCHAR(100) CHECK (email <>''),
-    image VARCHAR(500),
+    email VARCHAR(100) NOT NULL CHECK (email <>''),
+    image VARCHAR(500) NOT NULL,
     user_id INTEGER NOT NULL REFERENCES users(id)
 );
 

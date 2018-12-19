@@ -2,13 +2,24 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <title>Fair Food</title>
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
-        {{> navloggedin }}
 
-        {{{ body }}}
-    <script src="/script.js"></script>
+        <div class="nav-container">
+            {{> logo}}
+            {{#if loggedIn}}
+                {{> navloggedin}}
+            {{else}}
+                {{> nav}}
+            {{/if}}
+        </div>
+
+        <div class="main">
+            {{{ body }}}
+        </div>
+
+        <script src="/script.js"></script>
     </body>
 </html>

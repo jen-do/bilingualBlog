@@ -118,8 +118,7 @@ router
     .get((req, res) => {
         console.log("req.session", req.session.userId);
         res.render("editprofile", {
-            layout: "loggedin",
-            editor: req.session.editor
+            layout: "loggedin"
         });
     })
 
@@ -194,15 +193,13 @@ router
                 if (req.session.locale == "de") {
                     res.render("ownprojects", {
                         layout: "loggedin",
-                        updateProjectDe: results[0],
-                        editor: req.session.editor
+                        updateProjectDe: results[0]
                     });
                 } else if (req.session.locale == "en") {
                     console.log(results[1]);
                     res.render("ownprojects", {
                         layout: "loggedin",
-                        updateProjectEn: results[1],
-                        editor: req.session.editor
+                        updateProjectEn: results[1]
                     });
                 }
             })
@@ -224,7 +221,6 @@ router
                 console.log("results in /update/profile/:id", results);
                 res.render("updateprofile", {
                     layout: "loggedin",
-                    editor: req.session.editor,
                     singleProjectEn: results[0],
                     singleProjectDe: results[1]
                 });
@@ -270,7 +266,6 @@ router
                         // res.redirect("/update/profile/" + req.params.id);
                         res.render("updateprofile", {
                             success: true,
-                            editor: req.session.editor,
                             singleProjectEn: results[0],
                             singleProjectDe: results[1]
                         });
@@ -393,7 +388,6 @@ router
     .route("/blog")
 
     .get((req, res) => {
-        // req.params.lang = req.session.locale;
         if (req.session.locale == "en") {
             db.getPostsEn().then(results => {
                 console.log(results);

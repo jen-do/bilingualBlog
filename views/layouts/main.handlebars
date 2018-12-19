@@ -2,19 +2,21 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>final project</title>
+        <title>Fair Food</title>
         <link rel="stylesheet" href="/style.css">
     </head>
     <body>
 
         <div class="nav-container">
-            {{> nav}}
+            {{> logo}}
+            {{#if loggedIn}}
+                {{> navloggedin}}
+            {{else}}
+                {{> nav}}
+            {{/if}}
         </div>
 
         <div class="main">
-            <div class="top-bar">
-                <img id="logo" src="/images/logo.jpg" alt="logo" />
-            </div>
             {{{ body }}}
         </div>
 

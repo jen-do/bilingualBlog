@@ -4,28 +4,48 @@
     margin: 0;
 }
 
-.top-bar {
-    height: 60px;
-    background: #eaeaea;
+/********** FONTS ************/
+
+h1,
+h2 {
+    margin-bottom: 20px;
+}
+
+/********** HEADER ************/
+
+.nav-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid #eaeaea;
 }
 
 #logo {
-    width: 40px;
-    margin: 10px 20px;
+    width: 100px;
+    margin: 20px;
 }
-/* 
+
+nav {
+    margin-bottom: 20px;
+}
+
 nav a {
-    display: block;
-} */
-
-input,
-textarea {
-    display: block;
-    width: 250px;
+    text-decoration: none;
+    color: #666;
 }
 
-label {
-    margin: 15px;
+nav a:hover {
+    text-decoration: underline;
+}
+
+/********** MAIN ************/
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+    width: 80%;
 }
 
 .projects-outer-container {
@@ -47,6 +67,17 @@ label {
     width: 30%;
 }
 
+/********** FORM ELEMENTS ************/
+
+#form-outer-container {
+    margin: 0 auto;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .form-inner-container {
     display: flex;
     flex-direction: column;
@@ -58,11 +89,14 @@ label {
     padding: 10px;
 }
 
-#form-outer-container {
-    margin: 0 auto;
-    width: 70%;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
+input,
+textarea {
+    display: block;
+    width: 250px;
+    padding: 5px;
+    margin: 10px 0;
 }
+
+/* label {
+    margin: 15px;
+} */
