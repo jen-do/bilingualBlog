@@ -1,7 +1,7 @@
 <h1>{{{__ "heading update project info"}}}</h1>
 
 {{#if err}}
-    <div id="error"><strong>Uups. Something went wrong. Please try again.</strong></div>
+    <div id="error"><strong>Something went wrong. Please try again.</strong></div>
 {{/if}}
 
 {{#if success}}
@@ -15,9 +15,10 @@
         {{#each singleProjectDe}}
         <h2>DE</h2>
         <label>Name des Projekts<input type="text" name="de_name" value="{{de_name}}"></label>
-        <label>Kurzbeschreibung<textarea name="de_short">{{de_short}}</textarea></label>
-        <label>Langbeschreibung<textarea name="de_long">{{de_long}}</textarea></label>
-        <label>Beitragen<textarea name="de_contribute">{{de_contribute}}</textarea></label>
+        <label>Kurzbeschreibung<textarea name="de_short" rows="6">{{de_short}}</textarea></label>
+        <label>Langbeschreibung<textarea name="de_long" rows="10">{{de_long}}</textarea></label>
+        <label>Beitragen<textarea name="de_contribute" rows="6">{{de_contribute}}</textarea></label>
+        <label>Ort<input type="text" name="de_loc" value="{{de_loc}}" ></label>
         <label>Tags<input type="text" name="de_tags" value="{{de_tags}}"></label>
         <label>Webseite<input type="text" name="de_web" value="{{de_web}}"></label>
         {{/each}}
@@ -26,19 +27,19 @@
         {{#each singleProjectEn}}
         <h2>EN</h2>
         <label>Name of the project<input type="text" name="en_name" value="{{en_name}}"></label>
-        <label>Short description<textarea name="en_short">{{en_short}}</textarea></label>
-        <label>Long description<textarea name="en_long">{{en_long}}</textarea></label>
-        <label>How to contribute<textarea name="en_contribute">{{en_contribute}}</textarea></label>
+        <label>Short description<textarea name="en_short" rows="6">{{en_short}}</textarea></label>
+        <label>Long description<textarea name="en_long" rows="10">{{en_long}}</textarea></label>
+        <label>How to contribute<textarea name="en_contribute" rows="6">{{en_contribute}}</textarea></label>
+        <label>Location<input type="text" name="en_loc" value="{{en_loc}}"></label>
         <label>Tags<input type="text" name="en_tags" value="{{en_tags}}"></label>
         <label>Website<input type="text" name="en_web" value="{{en_web}}"></label>
     </div>
-    <div class="form-inner-container">
+    <div class="form-inner-container" id="email-upload">
         <label>Email<input type="email" name="contact" value="{{email}}"></label>
-        <label>Logo<input id="upload" type="file" accept="image/*" name="file"></label>
+        <label class="custom-file-upload">Upload a picture<input id="upload" type="file" accept="image/*" name="file"></label>
         {{/each}}
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <button>{{{__ "button submit"}}}</button>
-
     </div>
 </div>
 </form>

@@ -204,9 +204,25 @@ exports.updateProjectInfoGeneral = (id, email, image) => {
         UPDATE projects
         SET email = $2, image = $3
         WHERE id = $1
-        RETURNING id, email image
+        RETURNING id, email, image
         `,
             [id, email, image]
+        )
+        .then(results => {
+            return results.rows;
+        });
+};
+
+exports.updateProjectInfoGeneralWithoutImg = (id, email) => {
+    return db
+        .query(
+            `
+        UPDATE projects
+        SET email = $2
+        WHERE id = $1
+        RETURNING id, email, image
+        `,
+            [id, email]
         )
         .then(results => {
             return results.rows;
@@ -218,6 +234,7 @@ exports.updateProjectInfoDe = (
     short,
     long,
     contribute,
+    loc,
     tags,
     web,
     id
@@ -226,10 +243,10 @@ exports.updateProjectInfoDe = (
         .query(
             `
         UPDATE projects_de
-        SET de_name = $1, de_short = $2, de_long = $3, de_contribute = $4, de_tags = $5, de_web = $6
-        WHERE projects_id = $7
+        SET de_name = $1, de_short = $2, de_long = $3, de_contribute = $4, de_loc = $5, de_tags = $6, de_web = $7
+        WHERE projects_id = $8
         `,
-            [name, short, long, contribute, tags, web, id]
+            [name, short, long, contribute, loc, tags, web, id]
         )
         .then(results => {
             console.log(results);
@@ -242,6 +259,7 @@ exports.updateProjectInfoEn = (
     short,
     long,
     contribute,
+    loc,
     tags,
     web,
     id
@@ -250,10 +268,10 @@ exports.updateProjectInfoEn = (
         .query(
             `
         UPDATE projects_en
-        SET en_name = $1, en_short = $2, en_long = $3, en_contribute = $4, en_tags = $5, en_web = $6
-        WHERE projects_id = $7
+        SET en_name = $1, en_short = $2, en_long = $3, en_contribute = $4, en_loc = $5, en_tags = $6, en_web = $7
+        WHERE projects_id = $8
         `,
-            [name, short, long, contribute, tags, web, id]
+            [name, short, long, contribute, loc, tags, web, id]
         )
         .then(results => {
             return results.rows;

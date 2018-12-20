@@ -7,7 +7,10 @@
 
 {{#if successaddproject}}
     <h3>{{{__ "msg success add project"}}}</h3>
-    <p><strong><a href="{{link}}">{{{__ "msg success add project link"}}}</a></strong></p>
+    <strong>
+        <p><a href="{{linkProjectSite}}">{{{__ "msg success add project link projectsite"}}}</a></p>
+        <p><a href="{{link}}">{{{__ "msg success add project link"}}}</a></p>
+    </strong>
 {{/if}}
 
 <div class="projects-outer-container">
@@ -15,9 +18,11 @@
     {{#if en_name}}
     <div class="project-container" id="{{id}}">
         <a href="/projects/{{id}}"><img src={{image}}></a>
-        <h2>{{en_name}}</h2>
-        <p>{{en_short}}</p>
-        <p>{{en_tags}}</p>
+        <div class="project-text-container">
+            <h2>{{en_name}}</h2>
+            <p>{{en_short}}</p>
+            <p>{{en_tags}}</p>
+        </div>
     </div>
     {{/if}}
 {{/each}}
@@ -25,38 +30,58 @@
 
 <div class="projects-outer-container">
 {{#each projectsDe}}
-    <div class="project-container">
-        <a href="/projects/{{id}}"><img src={{image}}></a>
-        <h2>{{de_name}}</h2>
-        <p>{{de_short}}</p>
-        <p>{{de_tags}}</p>
-    </div>
+    {{#if de_name}}
+        <div class="project-container">
+            <a href="/projects/{{id}}"><img src={{image}}></a>
+            <div class="project-text-container">
+                <h2>{{de_name}}</h2>
+                <p>{{de_short}}</p>
+                <p >{{de_tags}}</p>
+            </div>
+        </div>
+    {{/if}}
 {{/each}}
 </div>
 
 {{#each singleProjectEn}}
     <div class="blog-roll-container">
-        <img src={{image}}>
-        <h1>{{en_name}}</h1>
-        <p><strong>{{en_short}}</strong></p>
-        <p><pre>{{en_long}}</pre></p>
-        <p>{{#if en_contribute}}<strong>How to contribute</strong>:{{/if}} <pre>{{en_contribute}}</pre></p>
-        <p>{{#if en_loc}}<strong>Location</strong>:{{/if}} {{en_loc}}</p>
-        <p>{{en_tags}}</p>
-        <p>{{#if en_web}}<strong>Web</strong>: {{/if}}<a href="{{en_web}}">{{en_web}}</a></p>
+        {{#if en_name}}
+            <img src={{image}}>
+            <div class="blog-text-container">
+                <h1>{{en_name}}</h1>
+                <div class="ta"><p><strong>{{en_short}}</strong></p></div>
+                <div class="ta"><p>{{en_long}}</p></div>
+                {{#if en_contribute}}<div class="ta"><p><strong>How to contribute</strong>: {{en_contribute}}</p></div>{{/if}}
+                {{#if en_loc}}<p><strong>Location</strong>: {{en_loc}}</p>{{/if}}
+                {{#if en_web}}<p><strong>Web</strong>: <a href="{{en_web}}">{{en_web}}</a></p>{{/if}}
+                <p>{{en_tags}}</p>
+            </div>
+        {{else}}
+        <div class="blog-text-container">
+            <p>Sorry, this content is only available in German.</p>
+        </div>
+        {{/if}}
     </div>
 {{/each}}
 
 
 {{#each singleProjectDe}}
 <div class="blog-roll-container">
-    <img src={{image}}>
-    <h1>{{de_name}}</h1>
-    <p><strong>{{de_short}}</strong></p>
-    <p><pre>{{de_long}}</pre></p>
-    <p>{{#if de_contribute}}<strong>Mitmachen</strong>:{{/if}} <pre>{{de_contribute}}</pre></p>
-    <p>{{#if de_loc}}<strong>Location</strong>:{{/if}} {{de_loc}}</p>
-    <p>{{de_tags}}</p>
-    <p>{{#if de_web}}<strong>Web</strong>: {{/if}}<a href="{{de_web}}">{{de_web}}</a></p>
+    {{#if de_name}}
+        <img src={{image}}>
+        <div class="blog-text-container">
+            <h1>{{de_name}}</h1>
+            <div class="ta"><p><strong>{{de_short}}</strong></p></div>
+            <div class="ta"><p>{{de_long}}</p></div>
+            {{#if de_contribute}}<div class="ta"><p><strong>Mitmachen</strong>: {{de_contribute}}</p></div>{{/if}}
+            {{#if de_loc}}<p><strong>Ort</strong>: {{de_loc}}</p>{{/if}}
+            {{#if de_web}}<p><strong>Web</strong>: <a href="{{de_web}}">{{de_web}}</a></p>{{/if}}
+            <p>{{de_tags}}</p>
+        </div>
+    {{else}}
+        <div class="blog-text-container">
+            <p>Sorry, den Artikel gibt es nur auf Englisch.</p>
+        </div>
+    {{/if}}
 </div>
 {{/each}}

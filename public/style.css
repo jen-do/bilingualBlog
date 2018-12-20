@@ -12,13 +12,25 @@ h3 {
     margin-bottom: 20px;
 }
 
-h1 {
+h1,
+label {
     font-family: "Source Code Pro", monospace;
 }
 
 body,
-pre {
+textarea,
+input {
     font-family: "Source Sans Pro", sans-serif;
+}
+
+label {
+    text-align: center;
+    font-weight: 600;
+    color: #999;
+}
+
+p {
+    padding: 10px 0;
 }
 
 /********** HEADER ************/
@@ -37,7 +49,6 @@ pre {
 
 nav {
     margin-bottom: 20px;
-    overflow: hidden;
 }
 
 nav a {
@@ -48,7 +59,30 @@ nav a {
 }
 
 nav a:hover {
-    border-bottom: 0.7px solid #333;
+    border-bottom: 0.7px solid #666;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content p {
+    margin: 5px 0;
 }
 
 /********** MAIN ************/
@@ -74,17 +108,32 @@ nav a:hover {
 
 .project-container,
 .blog-roll-container {
-    border: 1px solid #999;
+    -webkit-box-shadow: 2px 2px 15px 3px rgba(144, 144, 144, 1);
+    -moz-box-shadow: 2px 2px 15px 3px rgba(144, 144, 144, 1);
+    box-shadow: 2px 2px 15px 3px rgba(144, 144, 144, 1);
     margin: 10px;
-    padding: 10px;
+    position: relative;
 }
 
 .project-container {
     width: 31.25%;
 }
 
+.project-text-container {
+    margin: 10px;
+}
+
+.blog-text-container {
+    margin: 20px;
+}
+
+.ta {
+    white-space: pre-wrap;
+}
+
 .blog-roll-container {
     width: 70%;
+    margin: 20px 0;
 }
 
 .project-container img {
@@ -97,6 +146,19 @@ nav a:hover {
     width: 100%;
     max-height: 300px;
     object-fit: cover;
+    /* float: left;
+    margin-right: 10px; */
+}
+
+/********** ELEMENTS ************/
+
+.blogtags {
+    position: absolute;
+    padding: 10px 40px;
+    background-color: #eaeaea;
+    left: 0;
+    top: 30px;
+    font-weight: 600;
 }
 
 /********** FORM ELEMENTS ************/
@@ -116,10 +178,9 @@ nav a:hover {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    /* border: 1px solid black; */
-    /* margin: 10px; */
-    padding: 0 20px 20px 20px;
-    margin-top: 20px;
+    /* padding: 0 20px 20px 20px;
+    margin-top: 20px; */
+    margin: 20px 30px;
 }
 
 input,
@@ -130,7 +191,13 @@ textarea {
     margin: 10px 0;
 }
 
-#form-left {
+#authform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* #form-left {
     border-right: 1px solid #999;
 }
 
@@ -139,8 +206,42 @@ textarea {
     padding-top: 20px;
     width: 740px;
     border-top: 1px solid #999;
+} */
+
+label > input[type="file"] {
+    display: none;
 }
 
-/* label {
-    margin: 15px;
+button,
+.custom-file-upload {
+    background: #333;
+    color: #eee;
+    border: none;
+    padding: 5px 20px;
+    margin: 10px 0;
+    font-family: "Source Code Pro", monospace;
+    cursor: pointer;
+    width: 350px;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    font-size: 0.85em;
+    font-weight: 400;
+    text-align: center;
+}
+
+select {
+    display: block;
+    margin-top: 10px;
+    width: 350px;
+    padding: 5px;
+}
+
+label {
+    align-self: flex-start;
+}
+/*
+#email-upload {
+    align-items: stretch;
 } */

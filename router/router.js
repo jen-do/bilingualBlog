@@ -128,12 +128,6 @@ router
                 layout: "main",
                 errimg: "please upload an image"
             });
-        }
-        if (!req.body.contact) {
-            res.render("editprofile", {
-                layout: "main",
-                erremail: "no email"
-            });
         } else {
             db.saveProjectInfoGeneral(
                 req.body.contact,
@@ -196,7 +190,8 @@ router
                             res.render("projects", {
                                 layout: "main",
                                 successaddproject: true,
-                                link: "/update/profile/" + projectId
+                                link: "/update/profile/" + projectId,
+                                linkProjectSite: "/projects/" + projectId
                             });
                         })
                         .catch(err => {
@@ -267,90 +262,174 @@ router
     })
 
     .post((req, res) => {
-        db.updateProjectInfoGeneral(
-            req.params.id,
-            req.body.contact,
-            "/" + req.file.filename
-        )
-            .then(results => {
-                console.log("results in db.updateProjectInfoGeneral", results);
+        if (!req.file) {
+            db.updateProjectInfoGeneralWithoutImg(
+                req.params.id,
+                req.body.contact
+            )
+                .then(results => {
+                    console.log(results);
+                    var httpUrlDe = "";
+                    var httpUrlEn = "";
 
-                var httpUrlDe = "";
-                var httpUrlEn = "";
+                    if (
+                        req.body.de_web !== "" &&
+                        !req.body.de_web.startsWith("http") &&
+                        !req.body.de_web.startsWith("https")
+                    ) {
+                        httpUrlDe = "http://" + req.body.de_web;
+                        console.log("no http");
+                    } else {
+                        httpUrlDe = req.body.de_web;
+                        console.log("http");
+                    }
 
-                if (
-                    req.body.de_web !== "" &&
-                    !req.body.de_web.startsWith("http") &&
-                    !req.body.de_web.startsWith("https")
-                ) {
-                    httpUrlDe = "http://" + req.body.de_web;
-                    console.log("no http");
-                } else {
-                    httpUrlDe = req.body.de_web;
-                    console.log("http");
-                }
+                    if (
+                        req.body.en_web !== "" &&
+                        !req.body.en_web.startsWith("http") &&
+                        !req.body.en_web.startsWith("https")
+                    ) {
+                        httpUrlEn = "http://" + req.body.en_web;
+                        console.log("no http");
+                    } else {
+                        httpUrlEn = req.body.en_web;
+                        console.log("http");
+                    }
 
-                if (
-                    req.body.en_web !== "" &&
-                    !req.body.en_web.startsWith("http") &&
-                    !req.body.en_web.startsWith("https")
-                ) {
-                    httpUrlEn = "http://" + req.body.en_web;
-                    console.log("no http");
-                } else {
-                    httpUrlEn = req.body.en_web;
-                    console.log("http");
-                }
-
-                Promise.all([
-                    db.updateProjectInfoDe(
-                        req.body.de_name,
-                        req.body.de_short,
-                        req.body.de_long,
-                        req.body.de_contribute,
-                        req.body.de_tags,
-                        httpUrlDe,
-                        // req.body.de_web,
-                        req.params.id
-                    ),
-                    db.updateProjectInfoEn(
-                        req.body.en_name,
-                        req.body.en_short,
-                        req.body.en_long,
-                        req.body.en_contribute,
-                        req.body.en_tags,
-                        httpUrlEn,
-                        // req.body.en_web,
-                        req.params.id
-                    )
-                ])
-                    .then(results => {
-                        console.log(
-                            "results in db.updateProjectInfoDe/en",
-                            results
-                        );
-                        // res.redirect("/update/profile/" + req.params.id);
-                        res.render("projects", {
-                            layout: "main",
-                            successupdate: true,
-                            link: "/projects/" + req.params.id
+                    Promise.all([
+                        db.updateProjectInfoDe(
+                            req.body.de_name,
+                            req.body.de_short,
+                            req.body.de_long,
+                            req.body.de_contribute,
+                            req.body.de_loc,
+                            req.body.de_tags,
+                            httpUrlDe,
+                            req.params.id
+                        ),
+                        db.updateProjectInfoEn(
+                            req.body.en_name,
+                            req.body.en_short,
+                            req.body.en_long,
+                            req.body.en_contribute,
+                            req.body.en_loc,
+                            req.body.en_tags,
+                            httpUrlEn,
+                            req.params.id
+                        )
+                    ])
+                        .then(results => {
+                            console.log(
+                                "results in db.updateProjectInfoDe/en",
+                                results
+                            );
+                            // res.redirect("/update/profile/" + req.params.id);
+                            res.render("projects", {
+                                layout: "main",
+                                successupdate: true,
+                                link: "/projects/" + req.params.id
+                            });
+                        })
+                        .catch(err => {
+                            console.log("error in POST /edit/profile", err);
+                            res.render("updateprofile", {
+                                layout: "main",
+                                err: err
+                            });
                         });
-                    })
-                    .catch(err => {
-                        console.log("error in POST /edit/profile", err);
-                        res.render("updateprofile", {
-                            layout: "main",
-                            err: err
-                        });
+                })
+                .catch(err => {
+                    console.log("error in db.saveProjectInfoGeneral", err);
+                    res.render("editprofile", {
+                        layout: "main",
+                        err: err
                     });
-            })
-            .catch(err => {
-                console.log("error in db.saveProjectInfoGeneral", err);
-                res.render("editprofile", {
-                    layout: "main",
-                    err: err
                 });
-            });
+        } else {
+            db.updateProjectInfoGeneral(
+                req.params.id,
+                req.body.contact,
+                "/" + req.file.filename
+            )
+                .then(results => {
+                    console.log(results);
+                    var httpUrlDe = "";
+                    var httpUrlEn = "";
+
+                    if (
+                        req.body.de_web !== "" &&
+                        !req.body.de_web.startsWith("http") &&
+                        !req.body.de_web.startsWith("https")
+                    ) {
+                        httpUrlDe = "http://" + req.body.de_web;
+                        console.log("no http");
+                    } else {
+                        httpUrlDe = req.body.de_web;
+                        console.log("http");
+                    }
+
+                    if (
+                        req.body.en_web !== "" &&
+                        !req.body.en_web.startsWith("http") &&
+                        !req.body.en_web.startsWith("https")
+                    ) {
+                        httpUrlEn = "http://" + req.body.en_web;
+                        console.log("no http");
+                    } else {
+                        httpUrlEn = req.body.en_web;
+                        console.log("http");
+                    }
+
+                    Promise.all([
+                        db.updateProjectInfoDe(
+                            req.body.de_name,
+                            req.body.de_short,
+                            req.body.de_long,
+                            req.body.de_contribute,
+                            req.body.de_loc,
+                            req.body.de_tags,
+                            httpUrlDe,
+                            req.params.id
+                        ),
+                        db.updateProjectInfoEn(
+                            req.body.en_name,
+                            req.body.en_short,
+                            req.body.en_long,
+                            req.body.en_contribute,
+                            req.body.en_loc,
+                            req.body.en_tags,
+                            httpUrlEn,
+                            req.params.id
+                        )
+                    ])
+                        .then(results => {
+                            console.log(
+                                "results in db.updateProjectInfoDe/en",
+                                results
+                            );
+                            // res.redirect("/update/profile/" + req.params.id);
+                            res.render("projects", {
+                                layout: "main",
+                                successupdate: true,
+                                link: "/projects/" + req.params.id
+                            });
+                        })
+                        .catch(err => {
+                            console.log("error in POST /edit/profile", err);
+                            res.render("updateprofile", {
+                                layout: "main",
+                                err: err
+                            });
+                        });
+                })
+                .catch(err => {
+                    console.log("error in db.saveProjectInfoGeneral", err);
+                    res.render("editprofile", {
+                        layout: "main",
+                        err: err
+                    });
+                });
+        }
     });
 
 router
@@ -404,7 +483,7 @@ router
         // req.params.lang = req.session.locale;
         if (req.session.locale == "en") {
             db.getProjectInfoEn().then(results => {
-                console.log(results);
+                console.log("results en:", results);
                 const projectsEn = results;
                 res.render("projects", {
                     layout: "main",
@@ -417,7 +496,7 @@ router
                 const projectsDe = results;
                 res.render("projects", {
                     layout: "main",
-                    heading: "Projekte",
+                    heading: "projekte",
                     projectsDe: projectsDe
                 });
             });

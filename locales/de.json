@@ -17,7 +17,9 @@
     "msg success update link": "Hier geht's zum veröffentlichten Artikel.",
     "msg success add project":
         "Danke schön! Die Projektinfos wurden veröffentlicht.",
-    "msg success add project link": "Hier kannst Du sie nochmal editieren.",
+    "msg success add project link":
+        "Hier kannst Du die Infos nochmal editieren.",
     "heading own projects": "von dir veröffentlichte Projekte",
-    "p own projects": "Klick auf ein Bild, um das Projekt zu editieren."
+    "p own projects": "Klick auf ein Bild, um das Projekt zu editieren.",
+    "msg success add project link projectsite": "Hier geht's zur Projektseite."
 }

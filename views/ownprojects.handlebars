@@ -13,8 +13,10 @@
 {{#each updateProjectDe}}
     <div class="project-container">
         <a href="/update/profile/{{id}}"><img src={{image}}></a>
-        <h2>{{de_name}}</h2>
-        <p>{{de_short}}</p>
+        <div class="project-text-container">
+            <h2>{{de_name}}</h2>
+            <p>{{de_short}}</p>
+        </div>
     </div>
 {{/each}}
 </div>
@@ -24,8 +26,10 @@
     {{#if en_name}}
     <div class="project-container" id="{{id}}">
         <a href="/update/profile/{{id}}"><img src={{image}}></a>
-        <h2>{{en_name}}</h2>
-        <p>{{en_short}}</p>
+        <div class="project-text-container">
+            <h2>{{en_name}}</h2>
+            <p>{{en_short}}</p>
+        </div>
     </div>
     {{/if}}
 {{/each}}

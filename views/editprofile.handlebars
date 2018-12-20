@@ -9,13 +9,13 @@
     <p><strong>Please upload an image.</strong></p>
 {{/if}}
 
-{{#if erremail}}
+<!-- {{#if erremail}}
     <p><strong>Please enter a email address.</strong></p>
-{{/if}}
+{{/if}} -->
 
 <form method="POST" autocomplete="off" enctype="multipart/form-data">
 <div id="form-outer-container">
-    <div class="form-inner-container" id="form-left">
+    <div class="form-inner-container">
         <h2>DE</h2>
         <label>Name des Projekts<input type="text" name="de_name"></label>
         <label>Kurzbeschreibung<textarea name="de_short" rows="6"></textarea></label>
@@ -35,9 +35,9 @@
         <label>Tags<input type="text" name="en_tags"></label>
         <label>Website<input type="text" name="en_web"></label>
     </div>
-    <div class="form-inner-container" id="form-bottom">
+    <div class="form-inner-container">
         <label>Email<input type="email" name="contact" ></label>
-        <label>Logo<input id="upload" type="file" accept="image/*" name="file"></label>
+        <label class="custom-file-upload">Upload a picture<input id="upload" type="file" accept="image/*" name="file"></label>
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <button>{{{__ "button publish"}}}</button>
     </div>

@@ -17,8 +17,8 @@
     "msg success update link": "View the updated profile here.",
     "msg success add project":
         "Thank you for submitting. The information is now published.",
-    "msg success add project link":
-        "You can update the project's profile here.",
+    "msg success add project link": "Update the project's profile here",
     "heading own projects": "projects submitted by you",
-    "p own projects": "click to edit"
+    "p own projects": "click to edit",
+    "msg success add project link projectsite": "Visit the project's site"
 }
