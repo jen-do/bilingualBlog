@@ -123,92 +123,98 @@ router
     })
 
     .post((req, res) => {
-        console.log(
-            "req.body in POST /edit/profile ",
-            req.body,
-            "req.file in POST /edit/profile ",
-            req.file
-        );
-
-        db.saveProjectInfoGeneral(
-            req.body.contact,
-            "/" + req.file.filename,
-            req.session.userId
-        )
-            .then(results => {
-                console.log("results in db.saveProjectInfoGeneral", results);
-
-                var httpUrlDe = "";
-                var httpUrlEn = "";
-
-                if (
-                    req.body.de_web !== "" &&
-                    !req.body.de_web.startsWith("http") &&
-                    !req.body.de_web.startsWith("https")
-                ) {
-                    httpUrlDe = "http://" + req.body.de_web;
-                    console.log("no http");
-                } else {
-                    httpUrlDe = req.body.de_web;
-                    console.log("http");
-                }
-
-                if (
-                    req.body.en_web !== "" &&
-                    !req.body.en_web.startsWith("http") &&
-                    !req.body.en_web.startsWith("https")
-                ) {
-                    httpUrlEn = "http://" + req.body.en_web;
-                    console.log("no http");
-                } else {
-                    httpUrlEn = req.body.en_web;
-                    console.log("http");
-                }
-
-                Promise.all([
-                    db.saveProjectInfoDe(
-                        req.body.de_name,
-                        req.body.de_short,
-                        req.body.de_long,
-                        req.body.de_contribute,
-                        req.body.de_tags,
-                        httpUrlDe,
-                        // req.body.de_web,
-                        results[0].id
-                    ),
-                    db.saveProjectInfoEn(
-                        req.body.en_name,
-                        req.body.en_short,
-                        req.body.en_long,
-                        req.body.en_contribute,
-                        req.body.en_tags,
-                        httpUrlEn,
-                        // req.body.en_web,
-                        results[0].id
-                    )
-                ])
-                    .then(results => {
-                        console.log(
-                            "results in db.saveProjectInfoDe/en",
-                            results
-                        );
-                        res.redirect("/update/profile");
-                    })
-                    .catch(err => {
-                        console.log("error in POST /edit/profile", err);
-                        res.render("editprofile", {
-                            layout: "main",
-                            err: err
-                        });
-                    });
-            })
-            .catch(err => {
-                console.log("error in db.saveProjectInfoGeneral", err);
-                res.render("editprofile", {
-                    layout: "main",
-                    err: err
-                });
+        if (!req.file) {
+            res.render("editprofile", {
+                layout: "main",
+                errimg: "please upload an image"
             });
+        }
+        if (!req.body.contact) {
+            res.render("editprofile", {
+                layout: "main",
+                erremail: "no email"
+            });
+        } else {
+            db.saveProjectInfoGeneral(
+                req.body.contact,
+                "/" + req.file.filename,
+                req.session.userId
+            )
+                .then(results => {
+                    var projectId = results[0].id;
+                    var httpUrlDe = "";
+                    var httpUrlEn = "";
+
+                    if (
+                        req.body.de_web !== "" &&
+                        !req.body.de_web.startsWith("http") &&
+                        !req.body.de_web.startsWith("https")
+                    ) {
+                        httpUrlDe = "http://" + req.body.de_web;
+                        console.log("no http");
+                    } else {
+                        httpUrlDe = req.body.de_web;
+                        console.log("http");
+                    }
+
+                    if (
+                        req.body.en_web !== "" &&
+                        !req.body.en_web.startsWith("http") &&
+                        !req.body.en_web.startsWith("https")
+                    ) {
+                        httpUrlEn = "http://" + req.body.en_web;
+                        console.log("no http");
+                    } else {
+                        httpUrlEn = req.body.en_web;
+                        console.log("http");
+                    }
+
+                    Promise.all([
+                        db.saveProjectInfoDe(
+                            req.body.de_name,
+                            req.body.de_short,
+                            req.body.de_long,
+                            req.body.de_contribute,
+                            req.body.de_loc,
+                            req.body.de_tags,
+                            httpUrlDe,
+                            results[0].id
+                        ),
+                        db.saveProjectInfoEn(
+                            req.body.en_name,
+                            req.body.en_short,
+                            req.body.en_long,
+                            req.body.en_contribute,
+                            req.body.en_loc,
+                            req.body.en_tags,
+                            httpUrlEn,
+                            results[0].id
+                        )
+                    ])
+                        .then(results => {
+                            console.log(results);
+                            res.render("projects", {
+                                layout: "main",
+                                successaddproject: true,
+                                link: "/update/profile/" + projectId
+                            });
+                        })
+                        .catch(err => {
+                            console.log("error in POST /edit/profile", err);
+                            res.render("editprofile", {
+                                layout: "main",
+                                err: err
+                            });
+                        });
+                })
+                .catch(err => {
+                    console.log("error in db.saveProjectInfoGeneral", err);
+                    res.render("editprofile", {
+                        layout: "main",
+                        err: err
+                    });
+                });
+        }
     });
 
 router
@@ -324,10 +330,10 @@ router
                             results
                         );
                         // res.redirect("/update/profile/" + req.params.id);
-                        res.render("updateprofile", {
-                            success: true,
-                            singleProjectEn: results[0],
-                            singleProjectDe: results[1]
+                        res.render("projects", {
+                            layout: "main",
+                            successupdate: true,
+                            link: "/projects/" + req.params.id
                         });
                     })
                     .catch(err => {

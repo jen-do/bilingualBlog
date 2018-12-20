@@ -3,11 +3,16 @@
     <a href="/projects">{{{__ "nav projects"}}}</a> ||
     <a href="/blog">blog</a> ||
     <a href="/links">links</a> ||
-    <a href="/edit/profile">{{{__ "nav add project"}}}</a> ||
-    <a href="/update/profile">{{{__ "nav update project"}}}</a> ||
-    {{#if editor}}
-        <a href="/edit/post">{{{__ "nav edit post"}}}</a> ||
-    {{/if}}
+    <div class="dropdown">
+        <a href="#" class="dropdownlink">edit</a> ||
+        <div id="dropdownmenu" class="dropdown-content">
+            <a href="/edit/profile">{{{__ "nav add project"}}}</a>
+            <a href="/update/profile">{{{__ "nav update project"}}}</a>
+            {{#if editor}}
+                <a href="/edit/post">{{{__ "nav edit post"}}}</a>
+            {{/if}}
+        </div>
+    </div>
     <a href="/logout">logout</a> ||
-    <a href="/lang">de / en</a>
+    <a href="/lang">de/en</a>
 </nav>

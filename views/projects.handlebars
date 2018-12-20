@@ -1,33 +1,36 @@
 <h1>{{heading}}</h1>
 
+{{#if successupdate}}
+    <h3>{{{__ "msg success update"}}}</h3>
+    <p><strong><a href="{{link}}">{{{__ "msg success update link"}}}</a></strong></p>
+{{/if}}
 
+{{#if successaddproject}}
+    <h3>{{{__ "msg success add project"}}}</h3>
+    <p><strong><a href="{{link}}">{{{__ "msg success add project link"}}}</a></strong></p>
+{{/if}}
 
 <div class="projects-outer-container">
 {{#each projectsEn}}
     {{#if en_name}}
-    <!-- <a href='/projects/{{id}}'>-->
     <div class="project-container" id="{{id}}">
         <a href="/projects/{{id}}"><img src={{image}}></a>
-
         <h2>{{en_name}}</h2>
         <p>{{en_short}}</p>
         <p>{{en_tags}}</p>
     </div>
-<!-- </a> -->
     {{/if}}
 {{/each}}
 </div>
 
 <div class="projects-outer-container">
 {{#each projectsDe}}
-    <!-- <a href='/projects/{{id}}'>-->
     <div class="project-container">
         <a href="/projects/{{id}}"><img src={{image}}></a>
         <h2>{{de_name}}</h2>
         <p>{{de_short}}</p>
         <p>{{de_tags}}</p>
     </div>
-<!-- </a> -->
 {{/each}}
 </div>
 
@@ -37,9 +40,10 @@
         <h1>{{en_name}}</h1>
         <p><strong>{{en_short}}</strong></p>
         <p><pre>{{en_long}}</pre></p>
-        <p><strong>How to contribute</strong>: <pre>{{en_contribute}}</pre></p>
+        <p>{{#if en_contribute}}<strong>How to contribute</strong>:{{/if}} <pre>{{en_contribute}}</pre></p>
+        <p>{{#if en_loc}}<strong>Location</strong>:{{/if}} {{en_loc}}</p>
         <p>{{en_tags}}</p>
-        <p><strong>Web</strong>: <a href="{{en_web}}">{{en_web}}</a></p>
+        <p>{{#if en_web}}<strong>Web</strong>: {{/if}}<a href="{{en_web}}">{{en_web}}</a></p>
     </div>
 {{/each}}
 
@@ -50,8 +54,9 @@
     <h1>{{de_name}}</h1>
     <p><strong>{{de_short}}</strong></p>
     <p><pre>{{de_long}}</pre></p>
-    <p><strong>Mitmachen</strong>: <pre>{{de_contribute}}</pre></p>
+    <p>{{#if de_contribute}}<strong>Mitmachen</strong>:{{/if}} <pre>{{de_contribute}}</pre></p>
+    <p>{{#if de_loc}}<strong>Location</strong>:{{/if}} {{de_loc}}</p>
     <p>{{de_tags}}</p>
-    <p><strong>Web</strong>: <a href="{{de_web}}">{{de_web}}</a></p>
+    <p>{{#if de_web}}<strong>Web</strong>: {{/if}}<a href="{{de_web}}">{{de_web}}</a></p>
 </div>
 {{/each}}

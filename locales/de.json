@@ -1,17 +1,23 @@
 {
-    "text to test": "text to testdsdsjkldsjfjisdfidsuhf",
-    "about heading": "Über diese Seite",
+    "about heading": "über diese Seite",
     "about text":
         "Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien. Es ist ein paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen. Nicht einmal von der allmächtigen Interpunktion werden die Blindtexte beherrscht – ein geradezu unorthographisches Leben. Eines Tages aber beschloß eine kleine Zeile Blindtext, ihr Name war Lorem Ipsum, hinaus zu gehen in die weite Grammatik.Der große Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren. Es packte seine sieben Versalien, schob sich sein Initial in den Gürtel und machte sich auf den Weg ",
     "de": "de",
     "nav projects": "projekte",
     "nav register": "anmelden",
-    "heading edit profile": "Füge ein Projekt hinzu",
-    "heading edit posts": "Neuen Blogartikel erstellen",
+    "heading edit profile": "füge ein Projekt hinzu",
+    "heading edit posts": "neuen Blogartikel erstellen",
     "heading update project info": "Projektinfos aktualisieren",
     "nav add project": "projekt hinzufügen",
     "nav update project": "projektinfo aktualisieren",
     "nav edit post": "blogartikel hinzugügen",
     "button publish": "veröffentlichen",
-    "button submit": "abschicken"
+    "button submit": "abschicken",
+    "msg success update": "Die Projektinfo wurde aktualisiert. Danke schön!",
+    "msg success update link": "Hier geht's zum veröffentlichten Artikel.",
+    "msg success add project":
+        "Danke schön! Die Projektinfos wurden veröffentlicht.",
+    "msg success add project link": "Hier kannst Du sie nochmal editieren.",
+    "heading own projects": "von dir veröffentlichte Projekte",
+    "p own projects": "Klick auf ein Bild, um das Projekt zu editieren."
 }

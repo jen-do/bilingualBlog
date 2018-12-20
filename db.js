@@ -56,6 +56,7 @@ exports.saveProjectInfoDe = (
     short,
     long,
     contribute,
+    loc,
     tags,
     url,
     projects_id
@@ -63,11 +64,11 @@ exports.saveProjectInfoDe = (
     return db
         .query(
             `
-        INSERT INTO projects_de (de_name, de_short, de_long, de_contribute, de_tags, de_web, projects_id)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
-        RETURNING de_name, de_short, de_long, de_contribute, de_tags, de_web
+        INSERT INTO projects_de (de_name, de_short, de_long, de_contribute, de_loc, de_tags, de_web, projects_id)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        RETURNING de_name, de_short, de_long, de_contribute, de_loc, de_tags, de_web
         `,
-            [name, short, long, contribute, tags, url, projects_id]
+            [name, short, long, contribute, loc, tags, url, projects_id]
         )
         .then(results => {
             // console.log(results);
@@ -80,6 +81,7 @@ exports.saveProjectInfoEn = (
     short,
     long,
     contribute,
+    loc,
     tags,
     url,
     projects_id
@@ -87,14 +89,13 @@ exports.saveProjectInfoEn = (
     return db
         .query(
             `
-        INSERT INTO projects_en (en_name, en_short, en_long, en_contribute, en_tags, en_web, projects_id)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
-        RETURNING en_name, en_short, en_long, en_contribute, en_tags, en_web
+        INSERT INTO projects_en (en_name, en_short, en_long, en_contribute, en_loc, en_tags, en_web, projects_id)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        RETURNING en_name, en_short, en_long, en_contribute, en_loc, en_tags, en_web
         `,
-            [name, short, long, contribute, tags, url, projects_id]
+            [name, short, long, contribute, loc, tags, url, projects_id]
         )
         .then(results => {
-            // console.log(results);
             return results.rows;
         });
 };
@@ -103,14 +104,13 @@ exports.getProjectInfoEn = () => {
     return db
         .query(
             `
-        SELECT projects.id, projects.email, projects.image, projects_en.en_name, projects_en.en_short, projects_en.en_long, projects_en.en_contribute, projects_en.en_tags, projects_en.en_web FROM projects
+        SELECT projects.id, projects.email, projects.image, projects_en.en_name, projects_en.en_short, projects_en.en_long, projects_en.en_contribute, projects_en.en_loc, projects_en.en_tags, projects_en.en_web FROM projects
         LEFT JOIN projects_en
         ON projects.id = projects_id
         ORDER BY projects.id DESC
         `
         )
         .then(results => {
-            // console.log(results);
             return results.rows;
         });
 };
@@ -119,7 +119,7 @@ exports.getProjectInfoDe = () => {
     return db
         .query(
             `
-        SELECT projects.id, projects.email, projects.image, projects_de.de_name, projects_de.de_short, projects_de.de_long, projects_de.de_contribute, projects_de.de_tags, projects_de.de_web FROM projects
+        SELECT projects.id, projects.email, projects.image, projects_de.de_name, projects_de.de_short, projects_de.de_long, projects_de.de_contribute, projects_de.de_loc, projects_de.de_tags, projects_de.de_web FROM projects
         LEFT JOIN projects_de
         ON projects.id = projects_id
         ORDER BY projects.id DESC
@@ -135,7 +135,7 @@ exports.getSingleProjectEn = id => {
     return db
         .query(
             `
-        SELECT projects.id, projects.email, projects.image, projects_en.en_name, projects_en.en_short, projects_en.en_long, projects_en.en_contribute, projects_en.en_tags, projects_en.en_web FROM projects
+        SELECT projects.id, projects.email, projects.image, projects_en.en_name, projects_en.en_short, projects_en.en_long, projects_en.en_contribute, projects_en.en_loc, projects_en.en_tags, projects_en.en_web FROM projects
         LEFT JOIN projects_en
         ON projects.id = projects_id
         WHERE projects.id = $1
@@ -152,7 +152,7 @@ exports.getSingleProjectDe = id => {
     return db
         .query(
             `
-        SELECT projects.id, projects.email, projects.image, projects_de.de_name, projects_de.de_short, projects_de.de_long, projects_de.de_contribute, projects_de.de_tags, projects_de.de_web FROM projects
+        SELECT projects.id, projects.email, projects.image, projects_de.de_name, projects_de.de_short, projects_de.de_long, projects_de.de_contribute, projects_de.de_loc, projects_de.de_tags, projects_de.de_web FROM projects
         LEFT JOIN projects_de
         ON projects.id = projects_id
         WHERE projects.id = $1
@@ -169,7 +169,7 @@ exports.getProjectDeForReedit = userid => {
     return db
         .query(
             `
-        SELECT projects.id, projects.email, projects.image, projects_de.de_name, projects_de.de_short, projects_de.de_long, projects_de.de_contribute, projects_de.de_tags, projects_de.de_web FROM projects
+        SELECT projects.id, projects.email, projects.image, projects_de.de_name, projects_de.de_short, projects_de.de_long, projects_de.de_contribute, projects_de.de_loc, projects_de.de_tags, projects_de.de_web FROM projects
         LEFT JOIN projects_de
         ON projects.id = projects_id
         WHERE user_id = $1
@@ -185,7 +185,7 @@ exports.getProjectEnForReedit = userid => {
     return db
         .query(
             `
-        SELECT projects.id, projects.email, projects.image, projects_en.en_name, projects_en.en_short, projects_en.en_long, projects_en.en_contribute, projects_en.en_tags, projects_en.en_web FROM projects
+        SELECT projects.id, projects.email, projects.image, projects_en.en_name, projects_en.en_short, projects_en.en_long, projects_en.en_contribute, projects_en.en_loc, projects_en.en_tags, projects_en.en_web FROM projects
         LEFT JOIN projects_en
         ON projects.id = projects_id
         WHERE user_id = $1

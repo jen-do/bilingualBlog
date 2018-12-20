@@ -1,16 +1,24 @@
 {
-    "text to test": "testetstetstetstetstetstetstetst EN",
     "about heading": "about this site",
     "about text":
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum.",
     "nav projects": "projects",
     "nav register": "register",
-    "heading edit profile": "Add a project",
-    "heading edit posts": "Add a blog post",
-    "heading update project info": "Update project info",
+    "heading edit profile": "add a project",
+    "heading edit posts": "add a blog post",
+    "heading update project info": "update project info",
     "nav add project": "add project",
     "nav update project": "update project",
     "nav edit post": "add post",
     "button publish": "publish",
-    "button submit": "submit"
+    "button submit": "submit",
+    "msg success update":
+        "The update was successful. Thank you for submitting.",
+    "msg success update link": "View the updated profile here.",
+    "msg success add project":
+        "Thank you for submitting. The information is now published.",
+    "msg success add project link":
+        "You can update the project's profile here.",
+    "heading own projects": "projects submitted by you",
+    "p own projects": "click to edit"
 }

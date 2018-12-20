@@ -10,7 +10,7 @@ CREATE TABLE posts(
 
 CREATE TABLE posts_de(
     id SERIAL PRIMARY KEY,
-    de_title VARCHAR(300),
+    de_title VARCHAR(300) NOT NULL,
     de_post TEXT,
     de_tags VARCHAR(200),
     post_id INTEGER UNIQUE NOT NULL REFERENCES posts(id)
@@ -18,7 +18,7 @@ CREATE TABLE posts_de(
 
 CREATE TABLE posts_en(
     id SERIAL PRIMARY KEY,
-    en_title VARCHAR(300),
+    en_title VARCHAR(300) NOT NULL,
     en_post TEXT,
     en_tags VARCHAR(200),
     post_id INTEGER UNIQUE NOT NULL REFERENCES posts(id)

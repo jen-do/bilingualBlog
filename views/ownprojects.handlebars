@@ -1,14 +1,39 @@
-<h1>update project info</h1>
+<h1>{{{__ "heading own projects"}}}</h1>
 
-<ul>
+<h3>{{{__ "p own projects"}}}</h3>
+
+<!-- <ul>
 {{#each updateProjectDe}}
+
 <li><a href="/update/profile/{{id}}">{{de_name}}</a></li>
 {{/each}}
-</ul>
+</ul> -->
+
+<div class="projects-outer-container">
+{{#each updateProjectDe}}
+    <div class="project-container">
+        <a href="/update/profile/{{id}}"><img src={{image}}></a>
+        <h2>{{de_name}}</h2>
+        <p>{{de_short}}</p>
+    </div>
+{{/each}}
+</div>
+
+<div class="projects-outer-container">
+{{#each updateProjectEn}}
+    {{#if en_name}}
+    <div class="project-container" id="{{id}}">
+        <a href="/update/profile/{{id}}"><img src={{image}}></a>
+        <h2>{{en_name}}</h2>
+        <p>{{en_short}}</p>
+    </div>
+    {{/if}}
+{{/each}}
+</div>
 
 
-<ul>
+<!-- <ul>
 {{#each updateProjectEn}}
 <li><a href="/update/profile/{{id}}">{{en_name}}</a></li>
 {{/each}}
-</ul>
+</ul> -->
