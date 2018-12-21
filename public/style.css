@@ -33,6 +33,11 @@ p {
     padding: 10px 0;
 }
 
+a,
+a:visited {
+    color: #666;
+}
+
 /********** HEADER ************/
 
 .nav-container {
@@ -43,7 +48,7 @@ p {
 }
 
 #logo {
-    width: 300px;
+    width: 350px;
     margin: 20px;
 }
 
@@ -59,7 +64,7 @@ nav {
 
 nav a {
     text-decoration: none;
-    color: #fff;
+    color: #fff !important;
     font-family: "Source Code Pro", monospace;
 
     font-size: 0.9em;
@@ -96,6 +101,7 @@ nav a:hover {
 }
 
 .dropdown-content a {
+    font-size: 0.8em;
 }
 
 /********** MAIN ************/
@@ -129,7 +135,7 @@ nav a:hover {
 }
 
 .project-text-container {
-    margin: 10px;
+    margin: 15px;
 }
 
 .blog-text-container {
@@ -157,6 +163,15 @@ nav a:hover {
     object-fit: cover;
     /* float: left;
     margin-right: 10px; */
+}
+
+.project-tags {
+    background: #aaa;
+    padding: 5px;
+    width: fit-content;
+    margin-top: 5px;
+    border-radius: 5px;
+    color: #fff;
 }
 
 /********** ELEMENTS ************/

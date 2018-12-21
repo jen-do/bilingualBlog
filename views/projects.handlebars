@@ -2,12 +2,12 @@
 
 {{#if successupdate}}
     <h3>{{{__ "msg success update"}}}</h3>
-    <p><strong><a href="{{link}}">{{{__ "msg success update link"}}}</a></strong></p>
+    <p style="text-align: center"><strong><a href="{{link}}">{{{__ "msg success update link"}}}</a></strong></p>
 {{/if}}
 
 {{#if successaddproject}}
     <h3>{{{__ "msg success add project"}}}</h3>
-    <strong>
+    <strong style="text-align: center">
         <p><a href="{{linkProjectSite}}">{{{__ "msg success add project link projectsite"}}}</a></p>
         <p><a href="{{link}}">{{{__ "msg success add project link"}}}</a></p>
     </strong>
@@ -21,7 +21,7 @@
         <div class="project-text-container">
             <h2>{{en_name}}</h2>
             <p>{{en_short}}</p>
-            <p>{{en_tags}}</p>
+            {{#if en_tags}}<div class="project-tags">{{en_tags}}</div>{{/if}}
         </div>
     </div>
     {{/if}}
@@ -36,7 +36,7 @@
             <div class="project-text-container">
                 <h2>{{de_name}}</h2>
                 <p>{{de_short}}</p>
-                <p >{{de_tags}}</p>
+                {{#if de_tags}}<div class="project-tags">{{de_tags}}</div>{{/if}}
             </div>
         </div>
     {{/if}}
@@ -56,7 +56,7 @@
                 {{#if en_loc}}<p><strong>Location</strong>: {{en_loc}}</p>{{/if}}
                 {{#if email}}<p><strong>Contact</strong>: {{email}}</p>{{/if}}
                 {{#if en_web}}<p><strong>Web</strong>: <a href="{{en_web}}">{{en_web}}</a></p>{{/if}}
-                {{#if en_tags}}<p>{{en_tags}}</p>{{/if}}
+                {{#if en_tags}}<p class="project-tags">{{en_tags}}</p>{{/if}}
             </div>
         {{else}}
         <div class="blog-text-container">
@@ -79,7 +79,7 @@
             {{#if email}}<p><strong>Contact</strong>: {{email}}</p>{{/if}}
             {{#if de_loc}}<p><strong>Ort</strong>: {{de_loc}}</p>{{/if}}
             {{#if de_web}}<p><strong>Web</strong>: <a href="{{de_web}}">{{de_web}}</a></p>{{/if}}
-            <p>{{de_tags}}</p>
+            {{#if de_tags}}<p class="project-tags">{{de_tags}}</p>{{/if}}
         </div>
     {{else}}
         <div class="blog-text-container">
