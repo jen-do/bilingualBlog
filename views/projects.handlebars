@@ -46,6 +46,7 @@
 {{#each singleProjectEn}}
     <div class="blog-roll-container">
         {{#if en_name}}
+
             <img src={{image}}>
             <div class="blog-text-container">
                 <h1>{{en_name}}</h1>
@@ -53,8 +54,9 @@
                 <div class="ta"><p>{{en_long}}</p></div>
                 {{#if en_contribute}}<div class="ta"><p><strong>How to contribute</strong>: {{en_contribute}}</p></div>{{/if}}
                 {{#if en_loc}}<p><strong>Location</strong>: {{en_loc}}</p>{{/if}}
+                {{#if email}}<p><strong>Contact</strong>: {{email}}</p>{{/if}}
                 {{#if en_web}}<p><strong>Web</strong>: <a href="{{en_web}}">{{en_web}}</a></p>{{/if}}
-                <p>{{en_tags}}</p>
+                {{#if en_tags}}<p>{{en_tags}}</p>{{/if}}
             </div>
         {{else}}
         <div class="blog-text-container">
@@ -74,6 +76,7 @@
             <div class="ta"><p><strong>{{de_short}}</strong></p></div>
             <div class="ta"><p>{{de_long}}</p></div>
             {{#if de_contribute}}<div class="ta"><p><strong>Mitmachen</strong>: {{de_contribute}}</p></div>{{/if}}
+            {{#if email}}<p><strong>Contact</strong>: {{email}}</p>{{/if}}
             {{#if de_loc}}<p><strong>Ort</strong>: {{de_loc}}</p>{{/if}}
             {{#if de_web}}<p><strong>Web</strong>: <a href="{{de_web}}">{{de_web}}</a></p>{{/if}}
             <p>{{de_tags}}</p>

@@ -25,8 +25,8 @@ input {
 
 label {
     text-align: center;
-    font-weight: 600;
-    color: #999;
+    /* font-weight: 600; */
+    color: #666;
 }
 
 p {
@@ -39,27 +39,34 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-bottom: 1px solid #666;
+    /* border-bottom: 1px solid #666; */
 }
 
 #logo {
-    width: 100px;
+    width: 300px;
     margin: 20px;
 }
 
 nav {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    word-spacing: 10px;
+    background: #333;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
 }
 
 nav a {
     text-decoration: none;
-    color: #333;
+    color: #fff;
     font-family: "Source Code Pro", monospace;
-    /* font-size: 1.5em; */
+
+    font-size: 0.9em;
 }
 
 nav a:hover {
-    border-bottom: 0.7px solid #666;
+    border-bottom: 0.7px solid #fff;
 }
 
 .dropdown {
@@ -70,19 +77,25 @@ nav a:hover {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #fff;
+    text-align: left;
+    background-color: #333;
     min-width: 250px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    padding: 12px 16px;
+    padding: 0 15px;
     z-index: 1;
 }
 
 .dropdown:hover .dropdown-content {
     display: block;
+    word-spacing: 0px;
 }
 
 .dropdown-content p {
-    margin: 5px 0;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.dropdown-content a {
 }
 
 /********** MAIN ************/
@@ -91,19 +104,15 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px auto;
+    margin: 30px auto;
     width: 80%;
 }
 
 .projects-outer-container {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.projects-outer-container::after {
-    content: "";
-    flex: auto;
+    /* justify-content: space-around; */
 }
 
 .project-container,
