@@ -4,9 +4,9 @@ DROP TABLE IF EXISTS posts_en;
 
 CREATE TABLE posts(
     id SERIAL PRIMARY KEY,
-    image VARCHAR(300)
+    image VARCHAR(300),
+    user_id INTEGER NOT NULL REFERENCES users(id)
 );
-
 
 CREATE TABLE posts_de(
     id SERIAL PRIMARY KEY,

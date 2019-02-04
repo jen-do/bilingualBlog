@@ -16,7 +16,6 @@ exports.register = (username, email, pass) => {
             [username || null, email || null, pass || null]
         )
         .then(results => {
-            console.log(results);
             return results.rows;
         });
 };
@@ -46,7 +45,6 @@ exports.saveProjectInfoGeneral = (email, image, user_id) => {
             [email, image, user_id]
         )
         .then(results => {
-            // console.log(results);
             return results.rows;
         });
 };
@@ -71,7 +69,6 @@ exports.saveProjectInfoDe = (
             [name, short, long, contribute, loc, tags, url, projects_id]
         )
         .then(results => {
-            // console.log(results);
             return results.rows;
         });
 };
@@ -126,7 +123,6 @@ exports.getProjectInfoDe = () => {
         `
         )
         .then(results => {
-            // console.log(results);
             return results.rows;
         });
 };
@@ -143,7 +139,6 @@ exports.getSingleProjectEn = id => {
             [id]
         )
         .then(results => {
-            // console.log(results);
             return results.rows;
         });
 };
@@ -160,7 +155,6 @@ exports.getSingleProjectDe = id => {
             [id]
         )
         .then(results => {
-            // console.log(results);
             return results.rows;
         });
 };
@@ -249,7 +243,6 @@ exports.updateProjectInfoDe = (
             [name, short, long, contribute, loc, tags, web, id]
         )
         .then(results => {
-            console.log(results);
             return results.rows;
         });
 };
@@ -278,15 +271,15 @@ exports.updateProjectInfoEn = (
         });
 };
 
-exports.savePost = image => {
+exports.savePost = (image, userid) => {
     return db
         .query(
             `
-        INSERT INTO posts (image)
-        VALUES ($1)
+        INSERT INTO posts (image, user_id)
+        VALUES ($1, $2)
         RETURNING image, id
         `,
-            [image || null]
+            [image || null, userid]
         )
         .then(results => {
             return results.rows;
@@ -349,6 +342,119 @@ exports.getPostsEn = () => {
         ON posts.id = posts_en.post_id
         ORDER BY id DESC
         `
+        )
+        .then(results => {
+            return results.rows;
+        });
+};
+
+exports.getPostsDeForReedit = userid => {
+    return db
+        .query(
+            `
+        SELECT posts.id, posts.image, posts_de.de_title, posts_de.de_post, posts_de.de_tags
+        FROM posts
+        LEFT JOIN posts_de
+        ON posts.id = post_id
+        WHERE posts.user_id = $1
+        `,
+            [userid]
+        )
+        .then(results => {
+            return results.rows;
+        });
+};
+
+exports.getPostsEnForReedit = userid => {
+    return db
+        .query(
+            `
+        SELECT posts.id, posts.image, posts_en.en_title, posts_en.en_post, posts_en.en_tags
+        FROM posts
+        LEFT JOIN posts_en
+        ON posts.id = post_id
+        WHERE posts.user_id = $1
+        `,
+            [userid]
+        )
+        .then(results => {
+            return results.rows;
+        });
+};
+
+exports.getSinglePostEn = id => {
+    return db
+        .query(
+            `
+        SELECT posts.image, posts_en.en_title, posts_en.en_post, posts_en.en_tags
+        FROM posts
+        LEFT JOIN posts_en
+        ON posts.id = post_id
+        WHERE posts.id = $1
+        `,
+            [id]
+        )
+        .then(results => {
+            return results.rows;
+        });
+};
+
+exports.getSinglePostDe = id => {
+    return db
+        .query(
+            `
+        SELECT posts.image, posts_de.de_title, posts_de.de_post, posts_de.de_tags
+        FROM posts
+        LEFT JOIN posts_de
+        ON posts.id = post_id
+        WHERE posts.id = $1
+        `,
+            [id]
+        )
+        .then(results => {
+            return results.rows;
+        });
+};
+
+exports.updatePostImage = (id, image) => {
+    return db
+        .query(
+            `
+        UPDATE posts 
+        SET image = $2
+        WHERE id = $1
+        `,
+            [id, image]
+        )
+        .then(results => {
+            return results.rows;
+        });
+};
+
+exports.updatePostDe = (title, post, tags, id) => {
+    return db
+        .query(
+            `
+        UPDATE posts_de
+        SET de_title = $1, de_post = $2, de_tags= $3
+        WHERE post_id = $4
+        `,
+            [title, post, tags, id]
+        )
+        .then(results => {
+            return results.rows;
+        });
+};
+
+exports.updatePostEn = (title, post, tags, id) => {
+    return db
+        .query(
+            `
+        UPDATE posts_en
+        SET en_title = $1, en_post = $2, en_tags= $3
+        WHERE post_id = $4
+        `,
+            [title, post, tags, id]
         )
         .then(results => {
             return results.rows;

@@ -4,35 +4,38 @@
     <p><strong>Something went wrong. Please try again.</strong></p>
 {{/if}}
 
+{{#if errimg}}
+    <p><strong>Please upload an image.</strong></p>
+{{/if}}
+
 <form method="POST" autocomplete="off" enctype="multipart/form-data">
     <div id="form-outer-container">
-    <div class="form-inner-container">
-        <h2>DE</h2>
-        <label>Überschrift<input type="text" name="de_title"></label>
-        <label>Text<textarea name="de_post" rows="30"></textarea></label>
-        <label>Tags
-            <select name="de_tags">
-                <option value="veranstaltung">Veranstaltung</option>
-                <option value="neuigkeiten">Neuigkeiten</option>
-            </select>
-        </label>
+        <div class="form-inner-container">
+            <h2>DE</h2>
+            <label>Überschrift<input type="text" name="de_title"></label>
+            <label>Text<textarea name="de_post" rows="30"></textarea></label>
+            <label>Tags
+                <select name="de_tags">
+                    <option value="veranstaltung">Veranstaltung</option>
+                    <option value="neuigkeiten">Neuigkeiten</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-inner-container">
+            <h2>EN</h2>
+            <label>Heading<input type="text" name="en_title"></label>
+            <label>Text<textarea name="en_post" rows="30"></textarea></label>
+            <label>Tags
+                <select name="en_tags">
+                    <option value="event">Event</option>
+                    <option value="news">News</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-inner-container">
+        <label class="custom-file-upload">Upload a picture<input id="upload" type="file" accept="image/*" name="file"></label>
+        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <button>submit</button>
+        </div>
     </div>
-    <div class="form-inner-container">
-        <h2>EN</h2>
-        <label>Heading<input type="text" name="en_title"></label>
-        <label>Text<textarea name="en_post" rows="30"></textarea></label>
-        <label>Tags
-            <select name="en_tags">
-                <option value="event">Event</option>
-                <option value="news">News</option>
-            </select>
-        </label>
-    </div>
-    <div class="form-inner-container">
-    <label class="custom-file-upload">Upload a picture<input id="upload" type="file" accept="image/*" name="file"></label>
-    <input type="hidden" name="_csrf" value="{{csrfToken}}">
-    <button>submit</button>
-    </div>
-</div>
-
 </form>

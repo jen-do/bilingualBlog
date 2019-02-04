@@ -1,0 +1,28 @@
+<h1>update post</h1>
+
+<h3>click to edit</h3>
+
+
+<div class="projects-outer-container">
+{{#each ownPostsDe}}
+    <div class="project-container">
+        <a href="/update/post/{{id}}"><img src={{image}}></a>
+        <div class="project-text-container">
+            <h2>{{de_title}}</h2>
+        </div>
+    </div>
+{{/each}}
+</div>
+
+<div class="projects-outer-container">
+{{#each ownPostsEn}}
+    {{#if en_title}}
+    <div class="project-container" id="{{id}}">
+        <a href="/update/post/{{id}}"><img src={{image}}></a>
+        <div class="project-text-container">
+            <h2>{{en_title}}</h2>
+        </div>
+    </div>
+    {{/if}}
+{{/each}}
+</div>

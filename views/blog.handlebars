@@ -1,5 +1,9 @@
 <h1>blog</h1>
 
+{{#if successupdatepost}}
+    <h3>{{{__ "msg success update post"}}}</h3>
+    <p style="text-align: center"><strong><a href="{{link}}">{{{__ "msg success update post link"}}}</a></strong></p>
+{{/if}}
 
 {{#each postsEn}}
     {{#if en_title}}
