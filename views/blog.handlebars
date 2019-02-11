@@ -7,27 +7,35 @@
 
 {{#each postsEn}}
     {{#if en_title}}
-    <div class="blog-roll-container">
-        <img src="{{image}}">
-        <div class="blog-text-container">
-            <h2>{{en_title}}</h2>
-            {{#if en_post}}<div class="ta"><p>{{en_post}}</p></div>{{/if}}
-            {{#if en_tags}}<div class="blogtags">{{en_tags}}</div>{{/if}}
+        <div class="blog-roll-container">
+            <img src="{{image}}">
+            <div class="blog-text-container">
+                <h2>{{en_title}}</h2>
+                {{#if en_post}}
+                    <div class="ta"><p>{{en_post}}</p></div>
+                {{/if}}
+                {{#if en_tags}}
+                    <div class="blogtags">{{en_tags}}</div>
+                {{/if}}
+            </div>
         </div>
-    </div>
     {{/if}}
 {{/each}}
 
 
 {{#each postsDe}}
     {{#if de_title}}
-    <div class="blog-roll-container">
-        <img src="{{image}}">
-        <div class="blog-text-container">
-            <h2>{{de_title}}</h2>
-            {{#if de_post}}<div class="ta"><p>{{de_post}}</p></div>{{/if}}
-            {{#if de_tags}}<div class="blogtags">{{de_tags}}</div>{{/if}}
+        <div class="blog-roll-container">
+            <img src="{{image}}">
+            <div class="blog-text-container">
+                <h2>{{de_title}}</h2>
+                {{#if de_post}}
+                    <div class="ta"><p>{{de_post}}</p></div>
+                {{/if}}
+                {{#if de_tags}}
+                    <div class="blogtags">{{de_tags}}</div>
+                {{/if}}
+            </div>
         </div>
-    </div>
     {{/if}}
 {{/each}}

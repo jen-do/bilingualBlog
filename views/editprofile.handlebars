@@ -9,12 +9,9 @@
     <p><strong>Please upload an image.</strong></p>
 {{/if}}
 
-<!-- {{#if erremail}}
-    <p><strong>Please enter a email address.</strong></p>
-{{/if}} -->
-
 <form method="POST" autocomplete="off" enctype="multipart/form-data">
 <div id="form-outer-container">
+
     <div class="form-inner-container">
         <h2>DE</h2>
         <label>Name des Projekts<input type="text" name="de_name"></label>
@@ -25,6 +22,7 @@
         <label>Tags<input type="text" name="de_tags"></label>
         <label>Webseite<input type="text" name="de_web"></label>
     </div>
+
     <div class="form-inner-container">
         <h2>EN</h2>
         <label>Name of the project<input type="text" name="en_name"></label>
@@ -35,6 +33,7 @@
         <label>Tags<input type="text" name="en_tags"></label>
         <label>Website<input type="text" name="en_web"></label>
     </div>
+
     <div class="form-inner-container">
         <label>Email<input type="email" name="contact" ></label>
         <label class="custom-file-upload">Upload a picture<input id="upload" type="file" accept="image/*" name="file"></label>

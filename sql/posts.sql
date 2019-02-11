@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS posts_de;
 DROP TABLE IF EXISTS posts_en;
 
+
 CREATE TABLE posts(
     id SERIAL PRIMARY KEY,
     image VARCHAR(300),

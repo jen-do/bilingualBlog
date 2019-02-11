@@ -10,6 +10,7 @@
 
 <form method="POST" autocomplete="off" enctype="multipart/form-data">
     <div id="form-outer-container">
+
         <div class="form-inner-container">
             <h2>DE</h2>
             <label>Überschrift<input type="text" name="de_title"></label>
@@ -21,6 +22,7 @@
                 </select>
             </label>
         </div>
+
         <div class="form-inner-container">
             <h2>EN</h2>
             <label>Heading<input type="text" name="en_title"></label>
@@ -32,10 +34,11 @@
                 </select>
             </label>
         </div>
+
         <div class="form-inner-container">
-        <label class="custom-file-upload">Upload a picture<input id="upload" type="file" accept="image/*" name="file"></label>
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
-        <button>submit</button>
+            <label class="custom-file-upload">Upload a picture<input id="upload" type="file" accept="image/*" name="file"></label>
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+            <button>submit</button>
         </div>
     </div>
 </form>

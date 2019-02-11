@@ -110,6 +110,7 @@ router
         // checking the provided url if it contains http/https
         var httpUrlDe = "";
         var httpUrlEn = "";
+
         if (
             req.body.de_web !== "" &&
             !req.body.de_web.startsWith("http") &&

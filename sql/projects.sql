@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS projects_de;
 DROP TABLE IF EXISTS projects_en;
 
+
 CREATE TABLE projects(
     id SERIAL PRIMARY KEY,
     email VARCHAR(100),
